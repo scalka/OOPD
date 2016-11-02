@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">GeoQuiz2</string>
+    <string name="question">Is Dublin in Ireland?</string>
+    <string name="true_btn">TRUE</string>
+    <string name="false_btn">FALSE</string>
+    <string name="correct_toast">Correct</string>
+    <string name="incorrect_toast">Wrong</string>
+    <string name="q1">Ireland is bigger than Poland</string>
+    <string name="q2">Paris is a capital city of France</string>
+    <string name="q3">Source of Nile River is in Egypt</string>
+
+</resources>
