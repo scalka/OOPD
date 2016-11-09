@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 // – index for the array of questions, start at 0, increment when Next is clicked
                 if (mCurrentIndex<0) {
                     mCurrentIndex = 0;
-                } if else () {
+                } else {
                     mCurrentIndex = (mCurrentIndex - 1) % mQuestionBank.length;
                     updateQuestion();
 
