@@ -5,6 +5,8 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Date;
 
+
+
 public class DiaryModel {
     // List<E> is an interface - defines methods for redaing, deleting etc from a list
     // ArrayList is one of the implementations for the List interface - this is used instead of a Databse for the moment
