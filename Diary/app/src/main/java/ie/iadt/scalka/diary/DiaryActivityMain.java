@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-// TODO finished on slide 3 Lab8 - xml for fragment
+
 public class DiaryActivityMain extends FragmentActivity {
 
     @Override

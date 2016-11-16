@@ -29,7 +29,7 @@
         android:text="Was it a good day?"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/goodDay"
+        android:id="@+id/moodSwitch"
         android:textOn="@string/good_day"
         android:textOff="@string/not_good_day" />
 

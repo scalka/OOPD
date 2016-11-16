@@ -3,14 +3,20 @@ package ie.iadt.scalka.diary;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 
 public class DiaryFragment extends android.support.v4.app.Fragment {
     DiaryEntry mDiaryEntry;
     EditText mTitleField;
+    Button mDateButton;
+    Switch mMoodSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -38,6 +44,22 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
                 // not used method but has to be here
             }
         });
+
+        mDateButton = (Button)v.findViewById(R.id.dataPickerButton);
+        mDateButton.setText(mDiaryEntry.getDate().toString());
+        mDateButton.setEnabled(false);
+
+        mMoodSwitch = (Switch)v.findViewById(R.id.moodSwitch);
+        mMoodSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                //set the good mood
+                mDiaryEntry.setGoodDay(isChecked);
+                Log.i("fragm", "checked");
+            }
+        });
+
+
 
         return v;
     }
