@@ -24,7 +24,8 @@ public abstract class SingleFragmentActivity extends FragmentActivity{
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
 
         if (fragment == null){
-            fragment = new DiaryFragment();
+           // fragment = new DiaryFragment();
+            fragment = createFragment();
             manager.beginTransaction()
                     //add() creates and commits a fragment transaction
                     .add(R.id.fragmentContainer, fragment)

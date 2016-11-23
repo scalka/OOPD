@@ -33,5 +33,8 @@ public class DiaryEntry {
     public String getEntry(){ return mEntry; }
     public void setEntry(String entry){ mEntry = entry; }
 
-
+    @Override
+    public String toString(){
+        return mTitle;
+    }
 }
