@@ -1,13 +1,16 @@
-package ie.iadt.scalka.diary;
+package ie.iadt.scalka.diary.list_fragment;
 
 
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.View;
 import java.util.ArrayList;
+
+import ie.iadt.scalka.diary.R;
+import ie.iadt.scalka.diary.model.DiaryEntry;
+import ie.iadt.scalka.diary.model.DiaryModel;
 
 
 public class DiaryListFragment extends ListFragment {

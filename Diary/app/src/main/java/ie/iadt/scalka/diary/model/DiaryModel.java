@@ -1,10 +1,9 @@
-package ie.iadt.scalka.diary;
+package ie.iadt.scalka.diary.model;
 
 import android.content.Context;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 
 
 public class DiaryModel {

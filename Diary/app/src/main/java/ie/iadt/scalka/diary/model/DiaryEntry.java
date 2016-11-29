@@ -1,4 +1,4 @@
-package ie.iadt.scalka.diary;
+package ie.iadt.scalka.diary.model;
 
 import android.graphics.Picture;
 import java.util.Date;

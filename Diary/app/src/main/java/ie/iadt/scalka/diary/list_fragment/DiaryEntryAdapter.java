@@ -1,13 +1,16 @@
-package ie.iadt.scalka.diary;
+package ie.iadt.scalka.diary.list_fragment;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import ie.iadt.scalka.diary.R;
+import ie.iadt.scalka.diary.list_fragment.DiaryListActivity;
+import ie.iadt.scalka.diary.model.DiaryEntry;
 
 public class DiaryEntryAdapter extends ArrayAdapter<DiaryEntry>{
     Context context;

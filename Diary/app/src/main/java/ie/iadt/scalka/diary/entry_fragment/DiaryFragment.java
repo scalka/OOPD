@@ -1,4 +1,4 @@
-package ie.iadt.scalka.diary;
+package ie.iadt.scalka.diary.entry_fragment;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+
+import ie.iadt.scalka.diary.R;
+import ie.iadt.scalka.diary.model.DiaryEntry;
 
 public class DiaryFragment extends android.support.v4.app.Fragment {
     DiaryEntry mDiaryEntry;
