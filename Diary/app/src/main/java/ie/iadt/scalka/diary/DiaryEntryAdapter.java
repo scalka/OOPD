@@ -25,13 +25,15 @@ public class DiaryEntryAdapter extends ArrayAdapter<DiaryEntry>{
         if (null == convertView){
 
             convertView = ((DiaryListActivity) context).getLayoutInflater()
-                    .inflate(android.R.layout.simple_list_item_1, null);
+                    .inflate(R.layout.list_item_diary, null);
         }
         DiaryEntry de = getItem(position);
-// TODO LAYOUT FOR ITEM AND CONTINUES WITH LAB 10
-        TextView titleTextView = (TextView)convertView.findViewById(R.id.crime_list_item_titleTextView);
+
+        TextView titleTextView = (TextView)convertView.findViewById(R.id.diary_list_item_titleTextView);
         titleTextView.setText(de.getTitle());
 
+        TextView dateTextView = (TextView)convertView.findViewById(R.id.diary_list_item_date);
+        dateTextView.setText(de.getDate().toString());
 
         return convertView;
     }
