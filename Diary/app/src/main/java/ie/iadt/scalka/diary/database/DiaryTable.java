@@ -17,11 +17,11 @@ public class DiaryTable {
 
     // SQL to create table
     public static final String TABLE_CREATE =
-            "CREATE TABLE " + TABLE_ENTRIES + " (" +
-                    ENTRY_ID + "TEXT PRIMARY KEY, " +
-                    COLUMN_TITLE + "TEXT, " +
-                    COLUMN_DATE + "TEXT, " +
-                    COLUMN_ENTRY + "TEXT " + ")";
+            " CREATE TABLE " + TABLE_ENTRIES + " (" +
+                    ENTRY_ID + " TEXT PRIMARY KEY, " +
+                    COLUMN_TITLE + " TEXT, " +
+                    COLUMN_DATE + " TEXT, " +
+                    COLUMN_ENTRY + " TEXT " + ")";
 
     public static final String SQL_DELETE =
             "DROP TABLE " + TABLE_ENTRIES;
