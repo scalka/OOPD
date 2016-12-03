@@ -9,8 +9,8 @@ import ie.iadt.scalka.diary.database.DiaryTable;
 
 public class DiaryEntry {
 
-
-    private UUID mId;
+    private UUID uuid;
+    private String mId;
     private String id;
     private String mTitle;
     private String mEntry;
@@ -21,12 +21,12 @@ public class DiaryEntry {
 
     //Constructor
     public DiaryEntry(){
-        mId = UUID.randomUUID(); // no set for ID since it is automatically generated
+        uuid = UUID.randomUUID(); // no set for ID since it is automatically generated
         mDate = new Date().toString();
     }
 
     // get and set methods
-    public UUID getId() {
+    public String getId() {
         return mId;
     }
 

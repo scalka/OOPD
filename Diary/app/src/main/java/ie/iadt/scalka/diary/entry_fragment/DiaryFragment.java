@@ -30,7 +30,8 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         String entryId = getActivity().getIntent().getStringExtra(EXTRA_DIARY_ID);
-        mDiaryEntry = DiaryModel.get(getActivity()).getmDiaryEntry();
+        Log.d("entry id", entryId);
+        mDiaryEntry = DiaryModel.get(getActivity()).getDiaryEntry(entryId);
 
         //mDiaryEntry = new DiaryEntry();
     }
@@ -38,12 +39,14 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     //create and configure fragment's view, not in onCreat() (activities use onCreate())
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_diary_entry, parent, false);
-
         mTitleField = (EditText)v.findViewById(R.id.entry_title);
+        mTitleField.setText(mDiaryEntry.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 mDiaryEntry.setTitle(charSequence.toString());
+                DiaryModel diaryModel = DiaryModel.get(getActivity());
+                diaryModel.updateDiaryEntry(mDiaryEntry);
             }
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -72,6 +75,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
                 // not used method but has to be here
             }
         });
+
 
         mDateButton = (Button)v.findViewById(R.id.dataPickerButton);
         mDateButton.setText(mDiaryEntry.getDate().toString());

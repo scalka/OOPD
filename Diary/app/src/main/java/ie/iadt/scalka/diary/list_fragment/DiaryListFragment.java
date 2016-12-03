@@ -12,6 +12,7 @@ import android.content.Intent;
 
 import ie.iadt.scalka.diary.R;
 import ie.iadt.scalka.diary.entry_fragment.DiaryActivity;
+import ie.iadt.scalka.diary.entry_fragment.DiaryFragment;
 import ie.iadt.scalka.diary.model.DiaryEntry;
 import ie.iadt.scalka.diary.model.DiaryModel;
 
@@ -20,7 +21,7 @@ public class DiaryListFragment extends ListFragment {
 
     private static final String TAG = "DiaryListFragment";
     private ArrayList<DiaryEntry> mDiaryEntries;
-    public static final String EXTRA_DIARY_ID = "ie.iadt.scalka.diary.list_fragment.diary_id";
+    private DiaryEntryAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -43,7 +44,20 @@ public class DiaryListFragment extends ListFragment {
         Log.d(TAG, de.getTitle() + " was clicked");
 
         Intent intent = new Intent(getActivity(), DiaryActivity.class);
-        intent.putExtra(DiaryListFragment.EXTRA_DIARY_ID, de.getId());
+        intent.putExtra(DiaryFragment.EXTRA_DIARY_ID, de.getId());
         startActivity(intent);
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateUI();
+    }
+
+    private void updateUI() {
+        DiaryModel crimeModel = DiaryModel.get(getActivity());
+        ArrayList<DiaryEntry> mDiaryEntries = crimeModel.getmDiaryEntry();
+
+        adapter = new DiaryEntryAdapter(getActivity(), mDiaryEntries);
+        setListAdapter(adapter);
     }
 }

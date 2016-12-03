@@ -79,6 +79,27 @@ public class DiaryModel {
         return diaryEntries;
     };
 
+    public DiaryEntry getDiaryEntry(String id){
+        Cursor cursor = mDatabase.rawQuery("SELECT * FROM myentry WHERE id=?", new String[] {id+""});
+        DiaryEntry de = null;
+        if(cursor.getCount() > 0){
+            cursor.moveToFirst();
+            de.setId(cursor.getString(
+                    cursor.getColumnIndex(DiaryTable.COLUMN_ID)
+            ));
+            de.setTitle(cursor.getString(
+                    cursor.getColumnIndex(DiaryTable.COLUMN_TITLE)
+            ));
+            de.setDate(cursor.getString(
+                    cursor.getColumnIndex(DiaryTable.COLUMN_DATE)
+            ));
+            de.setEntry(cursor.getString(
+                    cursor.getColumnIndex(DiaryTable.COLUMN_ENTRY)
+            ));
+        }
+        return de;
+    }
+
     //populate the database
     public void seedDatabse(){
         DiaryEntry de = new DiaryEntry();
@@ -102,6 +123,10 @@ public class DiaryModel {
         ContentValues values = de.toValues();
         mDatabase.insert(DiaryTable.TABLE_ENTRIES, null, values);
         return de;
+    }
+    public void updateDiaryEntry(DiaryEntry de){
+        ContentValues values = de.toValues();
+        int result = mDatabase.update(DiaryTable.TABLE_ENTRIES, values, "id = ?", new String[] {de.getId()});
     }
 
 
