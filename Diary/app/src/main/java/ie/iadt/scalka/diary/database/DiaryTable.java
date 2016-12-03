@@ -8,20 +8,20 @@ public class DiaryTable {
     //name of the table
     public static final String TABLE_ENTRIES = "myentry";
     //definde the columns
-    public static final String ENTRY_ID = "id";
+    public static final String COLUMN_ID = "id";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_ENTRY = "entry";
 
-    public static final String[] ALL_COLUMNS = {ENTRY_ID, COLUMN_TITLE, COLUMN_DATE, COLUMN_ENTRY};
+    public static final String[] ALL_COLUMNS = {COLUMN_ID, COLUMN_TITLE, COLUMN_DATE, COLUMN_ENTRY};
 
     // SQL to create table
     public static final String TABLE_CREATE =
-            " CREATE TABLE " + TABLE_ENTRIES + " (" +
-                    ENTRY_ID + " TEXT PRIMARY KEY, " +
+            "CREATE TABLE " + TABLE_ENTRIES + " (" +
+                    COLUMN_ID + " TEXT PRIMARY KEY, " +
                     COLUMN_TITLE + " TEXT, " +
                     COLUMN_DATE + " TEXT, " +
-                    COLUMN_ENTRY + " TEXT " + ")";
+                    COLUMN_ENTRY + " TEXT" + ")";
 
     public static final String SQL_DELETE =
             "DROP TABLE " + TABLE_ENTRIES;

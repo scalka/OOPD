@@ -7,8 +7,6 @@ import java.util.UUID;
 
 import ie.iadt.scalka.diary.database.DiaryTable;
 
-import static java.util.Calendar.*;
-
 public class DiaryEntry {
 
 
@@ -52,9 +50,10 @@ public class DiaryEntry {
     public String toString(){
         return mTitle;
     }
+
     public ContentValues toValues(){
         ContentValues values = new ContentValues(4);
-        values.put(DiaryTable.ENTRY_ID, id);
+        values.put(DiaryTable.COLUMN_ID, id);
         values.put(DiaryTable.COLUMN_TITLE, mTitle);
         values.put(DiaryTable.COLUMN_DATE, mDate);
         values.put(DiaryTable.COLUMN_ENTRY, mEntry);

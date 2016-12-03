@@ -21,24 +21,16 @@ public class DiaryListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
         //returns hosting activity - DiaryActivity
         getActivity().setTitle(R.string.app_name);
         //returns list of entries
-     //   DiaryModel dm = DiaryModel.get(getActivity());
-     //   dm.getmDiaryEntry();
-       mDiaryEntries = DiaryModel.get(getActivity()).getmDiaryEntry();
-
-
+        DiaryModel dm = DiaryModel.get(getActivity());
+        dm.getmDiaryEntry();
+        mDiaryEntries = DiaryModel.get(getActivity()).getmDiaryEntry();
         //adapter is responsible for creating the view object, populating it with data from the model and returning the view object to listview
         //simple_list_item is predefined layout from android, has a textview as its root elements
-/*       ArrayAdapter<DiaryEntry>adapter =
-                new ArrayAdapter<DiaryEntry>(getActivity(),
-                        android.R.layout.simple_list_item_1,
-                        mDiaryEntries);
-        setListAdapter(adapter);*/
-//       DiaryEntryAdapter adapter = new DiaryEntryAdapter(getActivity(), mDiaryEntries);
-//        setListAdapter(adapter);
+       DiaryEntryAdapter adapter = new DiaryEntryAdapter(getActivity(), mDiaryEntries);
+        setListAdapter(adapter);
 
     }
     @Override

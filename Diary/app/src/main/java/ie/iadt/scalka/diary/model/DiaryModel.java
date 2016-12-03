@@ -61,13 +61,16 @@ public class DiaryModel {
         while (cursor.moveToNext()){
             DiaryEntry de = new DiaryEntry();
             de.setId(cursor.getString(
-                    cursor.getColumnIndex(DiaryTable.ENTRY_ID)
+                    cursor.getColumnIndex(DiaryTable.COLUMN_ID)
             ));
             de.setTitle(cursor.getString(
                     cursor.getColumnIndex(DiaryTable.COLUMN_TITLE)
             ));
             de.setDate(cursor.getString(
                     cursor.getColumnIndex(DiaryTable.COLUMN_DATE)
+            ));
+            de.setEntry(cursor.getString(
+                    cursor.getColumnIndex(DiaryTable.COLUMN_ENTRY)
             ));
             diaryEntries.add(de);
         }
@@ -80,8 +83,7 @@ public class DiaryModel {
 
         for(int i=0; i<20; i++){
             de.setId(Integer.toString(i));
-            de.setTitle("Entry title " + i);
-       //     de.setGoodDay(i%2 == 0); // every other one
+            de.setTitle("wwwwEntry title " + i);
             Date date = new Date();
             de.setDate(date.toString());
             de.setEntry("ghfhghh");
