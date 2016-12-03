@@ -12,19 +12,27 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import java.util.ArrayList;
+
 import ie.iadt.scalka.diary.R;
 import ie.iadt.scalka.diary.model.DiaryEntry;
+import ie.iadt.scalka.diary.model.DiaryModel;
 
 public class DiaryFragment extends android.support.v4.app.Fragment {
-    DiaryEntry mDiaryEntry;
-    EditText mTitleField;
-    Button mDateButton;
-    Switch mMoodSwitch;
+    public static final String EXTRA_DIARY_ID = "ie.iadt.scalka.diary.list_fragment.diary_id";
+    private DiaryEntry mDiaryEntry;
+    private EditText mTitleField;
+    private Button mDateButton;
+    private EditText mEntryField;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mDiaryEntry = new DiaryEntry();
+        String entryId = getActivity().getIntent().getStringExtra(EXTRA_DIARY_ID);
+        mDiaryEntry = DiaryModel.get(getActivity()).getmDiaryEntry();
+
+        //mDiaryEntry = new DiaryEntry();
     }
     @Override
     //create and configure fragment's view, not in onCreat() (activities use onCreate())
@@ -48,19 +56,27 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        mEntryField = (EditText)v.findViewById(R.id.entry_entry);
+        mEntryField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                mDiaryEntry.setEntry(charSequence.toString());
+            }
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // not used method but has to be here
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // not used method but has to be here
+            }
+        });
+
         mDateButton = (Button)v.findViewById(R.id.dataPickerButton);
         mDateButton.setText(mDiaryEntry.getDate().toString());
         mDateButton.setEnabled(false);
 
-        mMoodSwitch = (Switch)v.findViewById(R.id.moodSwitch);
-        mMoodSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                //set the good mood
-                mDiaryEntry.setGoodDay(isChecked);
-                Log.i("fragm", "checked");
-            }
-        });
 
 
 

@@ -25,6 +25,12 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
+    <EditText
+        android:id="@+id/entry_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter an entry"/>
+
     <Switch
         android:text="Was it a good day?"
         android:layout_width="match_parent"

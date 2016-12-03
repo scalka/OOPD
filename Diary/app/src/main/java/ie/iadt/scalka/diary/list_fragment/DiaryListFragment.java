@@ -7,8 +7,11 @@ import android.util.Log;
 import android.widget.ListView;
 import android.view.View;
 import java.util.ArrayList;
+import android.content.Intent;
+
 
 import ie.iadt.scalka.diary.R;
+import ie.iadt.scalka.diary.entry_fragment.DiaryActivity;
 import ie.iadt.scalka.diary.model.DiaryEntry;
 import ie.iadt.scalka.diary.model.DiaryModel;
 
@@ -17,6 +20,7 @@ public class DiaryListFragment extends ListFragment {
 
     private static final String TAG = "DiaryListFragment";
     private ArrayList<DiaryEntry> mDiaryEntries;
+    public static final String EXTRA_DIARY_ID = "ie.iadt.scalka.diary.list_fragment.diary_id";
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -30,12 +34,16 @@ public class DiaryListFragment extends ListFragment {
         //adapter is responsible for creating the view object, populating it with data from the model and returning the view object to listview
         //simple_list_item is predefined layout from android, has a textview as its root elements
        DiaryEntryAdapter adapter = new DiaryEntryAdapter(getActivity(), mDiaryEntries);
-        setListAdapter(adapter);
+       setListAdapter(adapter);
 
     }
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
         DiaryEntry de = (DiaryEntry)(getListAdapter()).getItem(position);
         Log.d(TAG, de.getTitle() + " was clicked");
+
+        Intent intent = new Intent(getActivity(), DiaryActivity.class);
+        intent.putExtra(DiaryListFragment.EXTRA_DIARY_ID, de.getId());
+        startActivity(intent);
     }
 }

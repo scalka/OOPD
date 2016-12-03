@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ie.iadt.scalka.diary.R;
 import ie.iadt.scalka.diary.database.DiaryDbHelper;
 import ie.iadt.scalka.diary.database.DiaryTable;
 
@@ -77,16 +78,17 @@ public class DiaryModel {
         cursor.close();
         return diaryEntries;
     };
+
     //populate the database
     public void seedDatabse(){
         DiaryEntry de = new DiaryEntry();
 
         for(int i=0; i<20; i++){
             de.setId(Integer.toString(i));
-            de.setTitle("wwwwEntry title " + i);
+            de.setTitle("Entry title " + i);
             Date date = new Date();
             de.setDate(date.toString());
-            de.setEntry("ghfhghh");
+            de.setEntry(mAppContext.getString(R.string.lorem_ipsum));
             try {
                 createEntry(de);
             } catch (SQLiteException e){

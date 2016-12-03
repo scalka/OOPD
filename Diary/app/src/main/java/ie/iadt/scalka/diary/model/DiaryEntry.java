@@ -50,7 +50,6 @@ public class DiaryEntry {
     public String toString(){
         return mTitle;
     }
-
     public ContentValues toValues(){
         ContentValues values = new ContentValues(4);
         values.put(DiaryTable.COLUMN_ID, id);
