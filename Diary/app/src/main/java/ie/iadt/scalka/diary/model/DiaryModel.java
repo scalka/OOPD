@@ -81,7 +81,7 @@ public class DiaryModel {
 
     public DiaryEntry getDiaryEntry(String id){
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM myentry WHERE id=?", new String[] {id+""});
-        DiaryEntry de = null;
+        DiaryEntry de = new DiaryEntry();
         if(cursor.getCount() > 0){
             cursor.moveToFirst();
             de.setId(cursor.getString(

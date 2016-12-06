@@ -9,9 +9,7 @@ import ie.iadt.scalka.diary.database.DiaryTable;
 
 public class DiaryEntry {
 
-    private UUID uuid;
     private String mId;
-    private String id;
     private String mTitle;
     private String mEntry;
     private String mDate;
@@ -21,7 +19,6 @@ public class DiaryEntry {
 
     //Constructor
     public DiaryEntry(){
-        uuid = UUID.randomUUID(); // no set for ID since it is automatically generated
         mDate = new Date().toString();
     }
 
@@ -30,8 +27,8 @@ public class DiaryEntry {
         return mId;
     }
 
-    public void setId(String mId) {
-        this.id = mId.toString();
+    public void setId(String id) {
+        mId = id;
     }
 
     public String getTitle(){ return mTitle; }
@@ -52,7 +49,7 @@ public class DiaryEntry {
     }
     public ContentValues toValues(){
         ContentValues values = new ContentValues(4);
-        values.put(DiaryTable.COLUMN_ID, id);
+        values.put(DiaryTable.COLUMN_ID, mId);
         values.put(DiaryTable.COLUMN_TITLE, mTitle);
         values.put(DiaryTable.COLUMN_DATE, mDate);
         values.put(DiaryTable.COLUMN_ENTRY, mEntry);

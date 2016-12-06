@@ -30,7 +30,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         String entryId = getActivity().getIntent().getStringExtra(EXTRA_DIARY_ID);
-        Log.d("entry id", entryId);
+        Log.d("diaryfragment", "error: " + entryId);
         mDiaryEntry = DiaryModel.get(getActivity()).getDiaryEntry(entryId);
 
         //mDiaryEntry = new DiaryEntry();
