@@ -2,12 +2,14 @@ package ie.iadt.scalka.diary.list_fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.widget.ListView;
 import android.view.View;
 import java.util.ArrayList;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 
 
 import ie.iadt.scalka.diary.R;
@@ -36,6 +38,15 @@ public class DiaryListFragment extends ListFragment {
         //simple_list_item is predefined layout from android, has a textview as its root elements
        DiaryEntryAdapter adapter = new DiaryEntryAdapter(getActivity(), mDiaryEntries);
        setListAdapter(adapter);
+
+        FloatingActionButton fab = (FloatingActionButton)(getActivity()).findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
     }
     @Override

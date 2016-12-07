@@ -20,20 +20,19 @@ import ie.iadt.scalka.diary.model.DiaryModel;
 
 public class DiaryFragment extends android.support.v4.app.Fragment {
     public static final String EXTRA_DIARY_ID = "ie.iadt.scalka.diary.list_fragment.diary_id";
+    public static final String EXTRA_NEW_ENTRY = "ie.iadt.scalka.diary.list_fragment.diary";
     private DiaryEntry mDiaryEntry;
     private EditText mTitleField;
     private Button mDateButton;
     private EditText mEntryField;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         String entryId = getActivity().getIntent().getStringExtra(EXTRA_DIARY_ID);
         Log.d("diaryfragment", "error: " + entryId);
-        mDiaryEntry = DiaryModel.get(getActivity()).getDiaryEntry(entryId);
+            mDiaryEntry = DiaryModel.get(getActivity()).getDiaryEntry(entryId);
 
-        //mDiaryEntry = new DiaryEntry();
     }
     @Override
     //create and configure fragment's view, not in onCreat() (activities use onCreate())
@@ -60,6 +59,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         });
 
         mEntryField = (EditText)v.findViewById(R.id.entry_entry);
+        mEntryField.setText(mDiaryEntry.getEntry());
         mEntryField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -80,9 +80,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         mDateButton = (Button)v.findViewById(R.id.dataPickerButton);
         mDateButton.setText(mDiaryEntry.getDate().toString());
         mDateButton.setEnabled(false);
-
-
-
 
         return v;
     }
