@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Diary</string>
+    <string name="good_day">Good Day</string>
+    <string name="not_good_day">Not that good day</string>
+    <string name="new_entry_textview">New Entry</string>
+    <string name="lorem_ipsum">ghfhghh</string>
+</resources>

@@ -34,7 +34,7 @@ public class DiaryModel {
         //mDiaryEntry = new ArrayList<>();
         mDbHelper = new DiaryDbHelper(appContext);
         mDatabase = mDbHelper.getWritableDatabase();
-        //seedDatabse();
+        seedDatabse();
     }
     public void open(){
         mDatabase = mDbHelper.getReadableDatabase();
@@ -101,7 +101,7 @@ public class DiaryModel {
     }
 
     //populate the database
-/*    public void seedDatabse(){
+    public void seedDatabse(){
         DiaryEntry de = new DiaryEntry();
 
         for(int i=0; i<20; i++){
@@ -118,7 +118,7 @@ public class DiaryModel {
 
             //mDiaryEntry.add(de);
         }
-    }*/
+    }
     public DiaryEntry createEntry(DiaryEntry de){
         ContentValues values = de.toValues();
         mDatabase.insert(DiaryTable.TABLE_ENTRIES, null, values);
