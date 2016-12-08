@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -128,6 +130,13 @@ public class DiaryModel {
         ContentValues values = de.toValues();
         int result = mDatabase.update(DiaryTable.TABLE_ENTRIES, values, "id = ?", new String[] {de.getId()});
     }
-
+    //this function returns objects that point to the right locations and it verifies if there is an external storage to write to 
+    public File getPhotoFile(DiaryEntry de){
+        File externalFilesDir = mAppContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (externalFilesDir == null){
+            return null;
+        }
+        return new File (externalFilesDir, de.getPhotoFilename());
+    }
 
 }

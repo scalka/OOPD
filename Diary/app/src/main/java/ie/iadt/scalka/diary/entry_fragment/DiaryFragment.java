@@ -1,5 +1,6 @@
 package ie.iadt.scalka.diary.entry_fragment;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 
 import java.util.ArrayList;
@@ -24,7 +27,8 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     private EditText mTitleField;
     private Button mDateButton;
     private EditText mEntryField;
-
+    private ImageButton mPhotoButton;
+    private ImageView mPhotoView;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -41,6 +45,10 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         View v = inflater.inflate(R.layout.fragment_diary_entry, parent, false);
         mTitleField = (EditText)v.findViewById(R.id.entry_title);
         mTitleField.setText(mDiaryEntry.getTitle());
+
+        mPhotoButton = (ImageButton)v.findViewById(R.id.entry_camera);
+        mPhotoView = (ImageView)v.findViewById(R.id.entry_photo);
+
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
