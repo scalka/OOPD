@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_height="match_parent"
               android:layout_width="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical" android:weightSum="1">
 
     <include layout="@layout/view_camera_and_title"></include>
@@ -30,14 +31,11 @@
         android:hint="Enter an entry" android:layout_weight="0.27"
         style="@style/Widget.AppCompat.EditText"
         android:selectAllOnFocus="true"/>
-
-    <Switch
-        android:text="Was it a good day?"
+    <CheckBox
+        android:text="CheckBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/moodSwitch"
-        android:textOn="@string/good_day"
-        android:textOff="@string/not_good_day" />
+        android:id="@+id/moodSwitch"/>
 
 
 </LinearLayout>

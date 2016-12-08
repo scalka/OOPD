@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -77,6 +78,9 @@ public class DiaryModel {
             de.setEntry(cursor.getString(
                     cursor.getColumnIndex(DiaryTable.COLUMN_ENTRY)
             ));
+            de.setGoodday(cursor.getInt(
+                    cursor.getColumnIndex(DiaryTable.COLUMN_GOODDAY)
+            ));
             diaryEntries.add(de);
         }
         cursor.close();
@@ -100,6 +104,9 @@ public class DiaryModel {
             de.setEntry(cursor.getString(
                     cursor.getColumnIndex(DiaryTable.COLUMN_ENTRY)
             ));
+            de.setGoodday(cursor.getInt(
+                    cursor.getColumnIndex(DiaryTable.COLUMN_GOODDAY)
+            ));
         }
         return de;
     }
@@ -111,8 +118,9 @@ public class DiaryModel {
             de.setId(Integer.toString(i));
             de.setTitle("Entry title " + i);
             Date date = new Date();
-            de.setDate(date.toString());
+            de.setDate(DateFormat.getDateTimeInstance().format(date).toString());
             de.setEntry(mAppContext.getString(R.string.lorem_ipsum));
+            de.setGoodday(1);
             try {
                 createEntry(de);
             } catch (SQLiteException e){
@@ -142,5 +150,4 @@ public class DiaryModel {
         }
         return new File (externalFilesDir, de.getPhotoFilename());
     }
-
 }

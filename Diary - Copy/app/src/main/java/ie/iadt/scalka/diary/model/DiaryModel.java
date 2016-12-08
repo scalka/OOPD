@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
+import java.io.File;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -34,7 +37,7 @@ public class DiaryModel {
         //mDiaryEntry = new ArrayList<>();
         mDbHelper = new DiaryDbHelper(appContext);
         mDatabase = mDbHelper.getWritableDatabase();
-        seedDatabse();
+       seedDatabse();
     }
     public void open(){
         mDatabase = mDbHelper.getReadableDatabase();
@@ -44,6 +47,7 @@ public class DiaryModel {
     }
     //this get method checks to see if DiaryMOdel is null - if it is it instantiates it
     // otherwise it returns the instance that exists
+
     public static DiaryModel get(Context c){
         if(sDiaryModel == null){
             sDiaryModel = new DiaryModel(c.getApplicationContext());
@@ -54,6 +58,7 @@ public class DiaryModel {
     //returns the Array list of entries in the database
     public ArrayList<DiaryEntry> getmDiaryEntry(){
         ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
+
         // check the class DiaryTablefor a definition of these constants table_diaruy and all columns
         //query() is part of the sqlitedatabase class that seeds a query to the database
         Cursor cursor = mDatabase.query(DiaryTable.TABLE_ENTRIES, DiaryTable.ALL_COLUMNS,
@@ -99,26 +104,28 @@ public class DiaryModel {
         }
         return de;
     }
-
     //populate the database
-    public void seedDatabse(){
+   public void seedDatabse(){
         DiaryEntry de = new DiaryEntry();
 
         for(int i=0; i<20; i++){
             de.setId(Integer.toString(i));
             de.setTitle("Entry title " + i);
             Date date = new Date();
-            de.setDate(date.toString());
+            de.setDate(DateFormat.getDateTimeInstance().format(date).toString());
             de.setEntry(mAppContext.getString(R.string.lorem_ipsum));
             try {
                 createEntry(de);
             } catch (SQLiteException e){
                 e.printStackTrace();
             }
-
-            //mDiaryEntry.add(de);
         }
     }
+
+    public void addEntry(DiaryEntry de){
+        getmDiaryEntry().add(de);
+    }
+
     public DiaryEntry createEntry(DiaryEntry de){
         ContentValues values = de.toValues();
         mDatabase.insert(DiaryTable.TABLE_ENTRIES, null, values);
@@ -128,6 +135,13 @@ public class DiaryModel {
         ContentValues values = de.toValues();
         int result = mDatabase.update(DiaryTable.TABLE_ENTRIES, values, "id = ?", new String[] {de.getId()});
     }
-
+    //this function returns objects that point to the right locations and it verifies if there is an external storage to write to
+    public File getPhotoFile(DiaryEntry de){
+        File externalFilesDir = mAppContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (externalFilesDir == null){
+            return new File (externalFilesDir, de.getPhotoFilename());
+        }
+        return new File (externalFilesDir, de.getPhotoFilename());
+    }
 
 }

@@ -2,6 +2,8 @@ package ie.iadt.scalka.diary.model;
 
 import android.content.ContentValues;
 import android.graphics.Picture;
+
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,11 +17,13 @@ public class DiaryEntry {
     private String mDate;
     private Picture mPicture;
     private boolean mGoodDay;
-    // mood, voice note etc....
+    private int mGoodday;
 
     //Constructor
     public DiaryEntry(){
-        mDate = new Date().toString();
+        Date date = new Date();
+        mDate = DateFormat.getDateTimeInstance().format(date);
+       // mDate = new Date().toString();
         setId(Integer.toString((int)(Math.random())));
     }
 
@@ -35,14 +39,19 @@ public class DiaryEntry {
     public String getTitle(){ return mTitle; }
     public void setTitle(String title){ mTitle = title; }
 
-    public boolean goodDay(){ return mGoodDay; }
-    public void setGoodDay(boolean goodDay){ mGoodDay = goodDay; }
-
     public String getDate(){ return mDate; }
     public void setDate(String date){ mDate = date; }
 
     public String getEntry(){ return mEntry; }
     public void setEntry(String entry){ mEntry = entry; }
+
+    public int getGoodday() {
+        return mGoodday;
+    }
+
+    public void setGoodday(int goodday) {
+        mGoodday = goodday;
+    }
 
     public void setPicture(Picture picture) {
         mPicture = picture;

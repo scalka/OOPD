@@ -2,6 +2,8 @@ package ie.iadt.scalka.diary.model;
 
 import android.content.ContentValues;
 import android.graphics.Picture;
+
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -19,7 +21,10 @@ public class DiaryEntry {
 
     //Constructor
     public DiaryEntry(){
-        mDate = new Date().toString();
+        Date date = new Date();
+        mDate = DateFormat.getDateTimeInstance().format(date);
+       // mDate = new Date().toString();
+        setId(Integer.toString((int)(Math.random())));
     }
 
     // get and set methods
@@ -42,6 +47,14 @@ public class DiaryEntry {
 
     public String getEntry(){ return mEntry; }
     public void setEntry(String entry){ mEntry = entry; }
+
+    public void setPicture(Picture picture) {
+        mPicture = picture;
+    }
+
+    public String getPhotoFilename(){
+            return "IMG_" + getId().toString() + ".jpg";
+    }
 
     @Override
     public String toString(){

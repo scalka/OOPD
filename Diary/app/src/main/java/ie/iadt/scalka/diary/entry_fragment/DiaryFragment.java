@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -36,6 +37,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
     private File mPhotoFile;
+    private CheckBox mSwitch;
     public static final int REQUEST_PHOTO = 2;
 
     @Override
@@ -55,6 +57,10 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         mTitleField.setText(mDiaryEntry.getTitle());
         mEntryField = (EditText)v.findViewById(R.id.entry_entry);
         mEntryField.setText(mDiaryEntry.getEntry());
+        mSwitch = (CheckBox) v.findViewById(R.id.moodSwitch);
+        if (mDiaryEntry.getGoodday() == 1){
+            mSwitch.setChecked(true);
+        }
     // taking pictures
         mPhotoButton = (ImageButton)v.findViewById(R.id.entry_camera);
 
