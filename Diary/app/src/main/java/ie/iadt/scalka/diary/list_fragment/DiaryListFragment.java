@@ -1,6 +1,7 @@
 package ie.iadt.scalka.diary.list_fragment;
 
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -12,8 +13,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.view.View;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,14 +31,16 @@ import ie.iadt.scalka.diary.entry_fragment.DiaryActivity;
 import ie.iadt.scalka.diary.entry_fragment.DiaryFragment;
 import ie.iadt.scalka.diary.model.DiaryEntry;
 import ie.iadt.scalka.diary.model.DiaryModel;
+import ie.iadt.scalka.diary.pictures.PictureUtils;
 
 
 public class DiaryListFragment extends Fragment {
     private RecyclerView mDiaryRecyclerView;
     private static final String TAG = "DiaryListFragment";
     private ArrayList<DiaryEntry> mDiaryEntries;
- //   private DiaryEntryAdapter adapter;
     private DiaryAdapter mAdapter;
+    private File mPhotoFile;
+    public ImageView mImageView;
 
 
     @Override
@@ -63,6 +69,7 @@ public class DiaryListFragment extends Fragment {
     private class DiaryHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView mTitleTextView;
         public TextView mDateTextView;
+
         private DiaryEntry mDiaryEntry;
 
         public DiaryHolder(View itemView) {
@@ -70,6 +77,8 @@ public class DiaryListFragment extends Fragment {
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView)itemView.findViewById(R.id.diary_list_item_titleTextView);
             mDateTextView = (TextView)itemView.findViewById(R.id.diary_list_item_date);
+            mImageView = (ImageView)itemView.findViewById(R.id.list_item_imageView);
+
         }
 
         @Override
@@ -84,6 +93,9 @@ public class DiaryListFragment extends Fragment {
             mDiaryEntry = de;
             mTitleTextView.setText(de.getTitle());
             mDateTextView.setText(de.getDate());
+            mPhotoFile = DiaryModel.get(getActivity()).getPhotoFile(mDiaryEntry); //grabbing photo file location
+            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            mImageView.setImageBitmap(bitmap);
         }
     }
 

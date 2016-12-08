@@ -36,7 +36,7 @@ public class DiaryModel {
         //mDiaryEntry = new ArrayList<>();
         mDbHelper = new DiaryDbHelper(appContext);
         mDatabase = mDbHelper.getWritableDatabase();
-       // seedDatabse();
+       seedDatabse();
     }
     public void open(){
         mDatabase = mDbHelper.getReadableDatabase();
@@ -118,8 +118,6 @@ public class DiaryModel {
             } catch (SQLiteException e){
                 e.printStackTrace();
             }
-
-            //mDiaryEntry.add(de);
         }
     }
 

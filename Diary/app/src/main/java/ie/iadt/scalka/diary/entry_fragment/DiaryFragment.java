@@ -53,6 +53,8 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         View v = inflater.inflate(R.layout.fragment_diary_entry, parent, false);
         mTitleField = (EditText)v.findViewById(R.id.entry_title);
         mTitleField.setText(mDiaryEntry.getTitle());
+        mEntryField = (EditText)v.findViewById(R.id.entry_entry);
+        mEntryField.setText(mDiaryEntry.getEntry());
     // taking pictures
         mPhotoButton = (ImageButton)v.findViewById(R.id.entry_camera);
 
@@ -97,6 +99,8 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 mDiaryEntry.setEntry(charSequence.toString());
+                DiaryModel diaryModel = DiaryModel.get(getActivity());
+                diaryModel.updateDiaryEntry(mDiaryEntry);
             }
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -116,7 +120,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
 
         return v;
     }
-    private void updatePhotoView(){
+    public void updatePhotoView(){
         if (mPhotoFile == null || !mPhotoFile.exists()){
             mPhotoView.setImageDrawable(null);
         } else {
