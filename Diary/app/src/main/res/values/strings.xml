@@ -6,4 +6,5 @@
     <string name="lorem_ipsum">ghfhghh</string>
     <string name="entry_title_label">Title</string>
     <string name="entry_title_hint">Entry title</string>
+    <string name="new_entry">New entry</string>
 </resources>

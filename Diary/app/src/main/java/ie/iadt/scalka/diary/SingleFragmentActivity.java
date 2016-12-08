@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * This class is abstract – you never want to instantiate it.
  * You can only inherit the code in a subclass.
  */
-public abstract class SingleFragmentActivity extends FragmentActivity{
+public abstract class SingleFragmentActivity extends AppCompatActivity{
     //createFragment() will be implemented to CrimeActivity code to create the appropriate Fragment
     protected abstract Fragment createFragment();
 

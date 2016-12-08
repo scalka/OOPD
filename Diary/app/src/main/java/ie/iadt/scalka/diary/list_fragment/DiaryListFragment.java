@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.view.View;
@@ -30,13 +33,14 @@ public class DiaryListFragment extends Fragment {
     private RecyclerView mDiaryRecyclerView;
     private static final String TAG = "DiaryListFragment";
     private ArrayList<DiaryEntry> mDiaryEntries;
-    private DiaryEntryAdapter adapter;
+ //   private DiaryEntryAdapter adapter;
     private DiaryAdapter mAdapter;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true); // telling that the function onCreteOptionsMenu should be called
         //returns hosting activity - DiaryActivity
         getActivity().setTitle(R.string.app_name);
         //returns list of entries
@@ -112,6 +116,26 @@ public class DiaryListFragment extends Fragment {
     public void onResume(){
         super.onResume();
         updateUI();
+    }
+    //inflating the menu resource
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_diary_entry_menu, menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_item_new_entry:
+                DiaryEntry de = new DiaryEntry();
+                DiaryModel.get(getActivity()).addEntry(de);
+                Intent intent = new Intent(getActivity(), DiaryActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     private void updateUI() {

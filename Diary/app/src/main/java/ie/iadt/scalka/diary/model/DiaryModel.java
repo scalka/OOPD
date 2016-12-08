@@ -36,7 +36,7 @@ public class DiaryModel {
         //mDiaryEntry = new ArrayList<>();
         mDbHelper = new DiaryDbHelper(appContext);
         mDatabase = mDbHelper.getWritableDatabase();
-        //seedDatabse();
+       // seedDatabse();
     }
     public void open(){
         mDatabase = mDbHelper.getReadableDatabase();
@@ -46,6 +46,7 @@ public class DiaryModel {
     }
     //this get method checks to see if DiaryMOdel is null - if it is it instantiates it
     // otherwise it returns the instance that exists
+
     public static DiaryModel get(Context c){
         if(sDiaryModel == null){
             sDiaryModel = new DiaryModel(c.getApplicationContext());
@@ -56,6 +57,7 @@ public class DiaryModel {
     //returns the Array list of entries in the database
     public ArrayList<DiaryEntry> getmDiaryEntry(){
         ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
+
         // check the class DiaryTablefor a definition of these constants table_diaruy and all columns
         //query() is part of the sqlitedatabase class that seeds a query to the database
         Cursor cursor = mDatabase.query(DiaryTable.TABLE_ENTRIES, DiaryTable.ALL_COLUMNS,
@@ -101,9 +103,8 @@ public class DiaryModel {
         }
         return de;
     }
-
     //populate the database
-/*    public void seedDatabse(){
+   public void seedDatabse(){
         DiaryEntry de = new DiaryEntry();
 
         for(int i=0; i<20; i++){
@@ -120,7 +121,12 @@ public class DiaryModel {
 
             //mDiaryEntry.add(de);
         }
-    }*/
+    }
+
+    public void addEntry(DiaryEntry de){
+        getmDiaryEntry().add(de);
+    }
+
     public DiaryEntry createEntry(DiaryEntry de){
         ContentValues values = de.toValues();
         mDatabase.insert(DiaryTable.TABLE_ENTRIES, null, values);
@@ -134,7 +140,7 @@ public class DiaryModel {
     public File getPhotoFile(DiaryEntry de){
         File externalFilesDir = mAppContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         if (externalFilesDir == null){
-            return null;
+            return new File (externalFilesDir, de.getPhotoFilename());
         }
         return new File (externalFilesDir, de.getPhotoFilename());
     }

@@ -20,6 +20,7 @@ public class DiaryEntry {
     //Constructor
     public DiaryEntry(){
         mDate = new Date().toString();
+        setId(Integer.toString((int)(Math.random())));
     }
 
     // get and set methods
@@ -43,8 +44,12 @@ public class DiaryEntry {
     public String getEntry(){ return mEntry; }
     public void setEntry(String entry){ mEntry = entry; }
 
+    public void setPicture(Picture picture) {
+        mPicture = picture;
+    }
+
     public String getPhotoFilename(){
-        return "IMG_" + getId().toString() + ".jpg";
+            return "IMG_" + getId().toString() + ".jpg";
     }
 
     @Override

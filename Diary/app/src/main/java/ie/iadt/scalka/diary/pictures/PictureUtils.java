@@ -3,7 +3,9 @@ package ie.iadt.scalka.diary.pictures;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.drawable.PictureDrawable;
 
 public class PictureUtils {
     //writing conservative scale method - checks how big is the screen and scales img to that size
