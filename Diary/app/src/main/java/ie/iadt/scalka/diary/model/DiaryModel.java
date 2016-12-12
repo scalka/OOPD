@@ -132,6 +132,9 @@ public class DiaryModel {
     public void addEntry(DiaryEntry de){
         getmDiaryEntry().add(de);
     }
+    public void deleteEntry(DiaryEntry de){
+        getmDiaryEntry().remove(de);
+    }
 
     public DiaryEntry createEntry(DiaryEntry de){
         ContentValues values = de.toValues();

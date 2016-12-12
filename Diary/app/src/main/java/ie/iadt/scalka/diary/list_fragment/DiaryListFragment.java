@@ -4,9 +4,9 @@ package ie.iadt.scalka.diary.list_fragment;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,19 +14,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.view.View;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 import android.content.Intent;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import ie.iadt.scalka.diary.R;
+import ie.iadt.scalka.diary.SimpleItemTouchHelperCallback;
 import ie.iadt.scalka.diary.entry_fragment.DiaryActivity;
 import ie.iadt.scalka.diary.entry_fragment.DiaryFragment;
 import ie.iadt.scalka.diary.model.DiaryEntry;
@@ -62,6 +61,13 @@ public class DiaryListFragment extends Fragment {
         mDiaryRecyclerView = (RecyclerView)view.findViewById(R.id.diary_recycler_view);
         //recycler view requires a layout manager
         mDiaryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAdapter = new DiaryAdapter(mDiaryEntries);
+
+        ItemTouchHelper.Callback callback =
+                new SimpleItemTouchHelperCallback(mAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mDiaryRecyclerView);
+
         updateUI();
         return view;
     }
@@ -99,7 +105,7 @@ public class DiaryListFragment extends Fragment {
         }
     }
 
-    private class DiaryAdapter extends RecyclerView.Adapter<DiaryHolder>{
+    private class DiaryAdapter extends RecyclerView.Adapter<DiaryHolder> implements SimpleItemTouchHelperCallback.ItemTouchHelperAdapter{
         private ArrayList<DiaryEntry> mDiaryEntries;
         public DiaryAdapter(ArrayList<DiaryEntry> diaryEntries){
             mDiaryEntries = diaryEntries;
@@ -122,6 +128,30 @@ public class DiaryListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mDiaryEntries.size();
+        }
+        /*ItemTouch methods
+        * call notifyItemRemoved() and notifyItemMoved() so the Adapter is aware of the changes
+        * It’s also important to note that we’re changing the position of the item every time the view is shifted to a new index*/
+        @Override
+        public boolean onItemMove(int fromPosition, int toPosition) {
+            if (fromPosition < toPosition) {
+                for (int i = fromPosition; i < toPosition; i++) {
+                    Collections.swap(mDiaryEntries, i, i + 1);
+                }
+            } else {
+                for (int i = fromPosition; i > toPosition; i--) {
+                    Collections.swap(mDiaryEntries, i, i - 1);
+                }
+            }
+            notifyItemMoved(fromPosition, toPosition);
+            return true;
+        }
+
+        @Override
+        public void onItemDismiss(int position) {
+            mDiaryEntries.remove(position);
+            DiaryModel.get(getActivity()).deleteEntry(mDiaryEntries.get(position));
+            notifyItemRemoved(position);
         }
     }
     @Override
@@ -157,4 +187,6 @@ public class DiaryListFragment extends Fragment {
         mAdapter = new DiaryAdapter(mDiaryEntries);
         mDiaryRecyclerView.setAdapter(mAdapter);
     }
+
+
 }

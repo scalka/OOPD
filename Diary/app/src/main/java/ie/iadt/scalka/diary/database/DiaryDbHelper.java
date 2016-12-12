@@ -18,6 +18,7 @@ public class DiaryDbHelper extends SQLiteOpenHelper{
         db.execSQL(DiaryTable.TABLE_CREATE);
         Log.d(tag, DiaryTable.TABLE_CREATE);
     }
+
     //upUpgrade called when the vesion of table is changed
     //in real content dropping the table isnt the best option
     @Override
