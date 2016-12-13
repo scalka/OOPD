@@ -28,6 +28,8 @@ import ie.iadt.scalka.diary.model.DiaryEntry;
 import ie.iadt.scalka.diary.model.DiaryModel;
 import ie.iadt.scalka.diary.pictures.PictureUtils;
 
+import static android.app.Activity.RESULT_OK;
+
 public class DiaryFragment extends android.support.v4.app.Fragment {
     public static final String EXTRA_DIARY_ID = "ie.iadt.scalka.diary.list_fragment.diary_id";
     public static final String EXTRA_NEW_ENTRY = "ie.iadt.scalka.diary.list_fragment.diary";
@@ -40,6 +42,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     private File mPhotoFile;
     private CheckBox mSwitch;
     public static final int REQUEST_PHOTO = 2;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -77,6 +80,11 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 startActivityForResult(captureImage, REQUEST_PHOTO);
+                /**not working
+                 *
+                 *
+                 * ***/
+                onActivityResult(REQUEST_PHOTO, RESULT_OK, captureImage, (ImageView)view.findViewById(R.id.entry_photo));
             }
         });
         mPhotoView = (ImageView)v.findViewById(R.id.entry_photo);
@@ -134,6 +142,14 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         } else {
             Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
             mPhotoView.setImageBitmap(bitmap);
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data, ImageView view) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            view.setImageBitmap(imageBitmap);
         }
     }
 }

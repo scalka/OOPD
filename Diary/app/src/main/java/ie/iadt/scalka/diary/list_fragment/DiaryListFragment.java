@@ -57,15 +57,6 @@ public class DiaryListFragment extends Fragment {
         DiaryModel dm = DiaryModel.get(getActivity());
         dm.getmDiaryEntry();
         mDiaryEntries = DiaryModel.get(getActivity()).getmDiaryEntry();
-        FloatingActionButton fab = (FloatingActionButton)(getActivity()).findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
     }
 
 

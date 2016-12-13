@@ -1,13 +1,19 @@
 package ie.iadt.scalka.diary.pictures;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.PictureDrawable;
+import android.os.Bundle;
+import android.widget.ImageView;
+
+import static android.app.Activity.RESULT_OK;
 
 public class PictureUtils {
+
     //writing conservative scale method - checks how big is the screen and scales img to that size
     public static Bitmap getScaledBitmap(String path, Activity activity){
         Point size = new Point();
@@ -39,4 +45,5 @@ public class PictureUtils {
         //read in and create final bitmap
         return BitmapFactory.decodeFile(path, options);
     }
+
 }
