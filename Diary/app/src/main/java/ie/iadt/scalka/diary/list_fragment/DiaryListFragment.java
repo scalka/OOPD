@@ -113,7 +113,7 @@ public class DiaryListFragment extends Fragment {
     private class DiaryAdapter extends RecyclerView.Adapter<DiaryHolder> implements SimpleItemTouchHelperCallback.ItemTouchHelperAdapter{
         private ArrayList<DiaryEntry> mDiaryEntries;
         public DiaryAdapter(ArrayList<DiaryEntry> diaryEntries){
-            mDiaryEntries = diaryEntries;
+            mDiaryEntries = DiaryModel.get(getActivity()).getmDiaryEntry();
         }
         @Override
         public DiaryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -156,6 +156,7 @@ public class DiaryListFragment extends Fragment {
         public void onItemDismiss(int position) {
             mDiaryEntries.remove(position);
             DiaryModel.get(getActivity()).deleteEntry(mDiaryEntries.get(position));
+
             notifyItemRemoved(position);
         }
     }

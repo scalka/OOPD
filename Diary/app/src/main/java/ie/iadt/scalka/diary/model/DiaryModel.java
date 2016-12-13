@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -133,6 +134,7 @@ public class DiaryModel {
         getmDiaryEntry().add(de);
     }
     public boolean deleteEntry(DiaryEntry de){
+        Log.d("diarymodel deleteentry", "deleeeeeting entry");
         return mDatabase.delete(DiaryTable.TABLE_ENTRIES, DiaryTable.COLUMN_ID + "=" + de.getId(), null) > 0;
     }
 
