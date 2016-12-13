@@ -1,43 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical">
+              android:layout_height="match_parent"
+              android:layout_width="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical" android:weightSum="1">
+
+    <include layout="@layout/view_camera_and_title"></include>
+
+    <!--style says to go to style folder and apply particular style-->
+
+   <!-- <EditText
+        android:id="@+id/entry_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter a title for the entry"/>
+-->
+    <!--btn ist gonna be set to open datapicker-->
+
 
     <TextView
         android:text="@string/new_entry_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/NewEntry"
-        style="?android:listSeparatorTextViewStyle"/> <!--style says to go to style folder and apply particular style-->
-
-    <EditText
-        android:id="@+id/entry_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter a title for the entry"/>
-
-    <!--btn ist gonna be set to open datapicker-->
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/dataPickerButton"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-
+        style="?android:listSeparatorTextViewStyle"/>
     <EditText
         android:id="@+id/entry_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter an entry"/>
-
-    <Switch
-        android:text="Was it a good day?"
+        android:hint="Enter an entry" android:layout_weight="0.27"
+        style="@style/Widget.AppCompat.EditText"
+        android:selectAllOnFocus="true"/>
+    <CheckBox
+        android:text="CheckBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/moodSwitch"
-        android:textOn="@string/good_day"
-        android:textOff="@string/not_good_day" />
+        android:id="@+id/moodSwitch"/>
 
 
 </LinearLayout>

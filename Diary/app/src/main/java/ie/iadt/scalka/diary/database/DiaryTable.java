@@ -12,8 +12,9 @@ public class DiaryTable {
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_ENTRY = "entry";
+    public static final String COLUMN_GOODDAY = "goodday";
 
-    public static final String[] ALL_COLUMNS = {COLUMN_ID, COLUMN_TITLE, COLUMN_DATE, COLUMN_ENTRY};
+    public static final String[] ALL_COLUMNS = {COLUMN_ID, COLUMN_TITLE, COLUMN_DATE, COLUMN_ENTRY, COLUMN_GOODDAY};
 
     // SQL to create table
     public static final String TABLE_CREATE =
@@ -21,7 +22,8 @@ public class DiaryTable {
                     COLUMN_ID + " TEXT PRIMARY KEY, " +
                     COLUMN_TITLE + " TEXT, " +
                     COLUMN_DATE + " TEXT, " +
-                    COLUMN_ENTRY + " TEXT" + ")";
+                    COLUMN_ENTRY + " TEXT, " +
+                    COLUMN_GOODDAY + " INTEGER" + ")";
 
     public static final String SQL_DELETE =
             "DROP TABLE " + TABLE_ENTRIES;
