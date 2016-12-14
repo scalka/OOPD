@@ -8,5 +8,8 @@
     <string name="entry_title_label">Title</string>
     <string name="entry_title_hint">Entry title</string>
     <string name="new_entry">New entry</string>
+    <string name="save">Save</string>
+    <string name="enter_an_entry">Enter an entry</string>
+    <string name="good_day_checkbox">Good Day</string>
 
 </resources>

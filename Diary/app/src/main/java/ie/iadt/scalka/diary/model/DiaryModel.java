@@ -39,7 +39,7 @@ public class DiaryModel {
         //mDiaryEntry = new ArrayList<>();
         mDbHelper = new DiaryDbHelper(appContext);
         mDatabase = mDbHelper.getWritableDatabase();
-       seedDatabse();
+       //seedDatabse();
     }
     public void open(){
         mDatabase = mDbHelper.getReadableDatabase();
@@ -87,7 +87,7 @@ public class DiaryModel {
         }
         cursor.close();
         return diaryEntries;
-    };
+    }
 
     public DiaryEntry getDiaryEntry(String id){
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM myentry WHERE id=?", new String[] {id+""});
@@ -116,7 +116,7 @@ public class DiaryModel {
    public void seedDatabse(){
         DiaryEntry de = new DiaryEntry();
 
-        for(int i=0; i<20; i++){
+        for(int i=0; i<10; i++){
             de.setId(Integer.toString(i));
             de.setTitle("Entry title " + i);
             Date date = new Date();

@@ -23,10 +23,8 @@ public class DiaryEntry {
     public DiaryEntry(){
         Date date = new Date();
         mDate = DateFormat.getDateTimeInstance().format(date);
-       // mDate = new Date().toString();
         setId(Integer.toString((int)(Math.random())));
     }
-
     // get and set methods
     public String getId() {
         return mId;
@@ -51,10 +49,6 @@ public class DiaryEntry {
 
     public void setGoodday(int goodday) {
         mGoodday = goodday;
-    }
-
-    public void setPicture(Picture picture) {
-        mPicture = picture;
     }
 
     public String getPhotoFilename(){

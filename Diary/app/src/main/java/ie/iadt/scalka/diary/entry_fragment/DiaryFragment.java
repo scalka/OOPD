@@ -20,23 +20,16 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.content.Intent;
-
 import java.io.File;
-import java.util.ArrayList;
-
 import ie.iadt.scalka.diary.R;
 import ie.iadt.scalka.diary.list_fragment.DiaryListActivity;
-import ie.iadt.scalka.diary.list_fragment.DiaryListFragment;
 import ie.iadt.scalka.diary.model.DiaryEntry;
 import ie.iadt.scalka.diary.model.DiaryModel;
 import ie.iadt.scalka.diary.pictures.PictureUtils;
 
-
 public class DiaryFragment extends android.support.v4.app.Fragment {
     public static final String EXTRA_DIARY_ID = "ie.iadt.scalka.diary.list_fragment.diary_id";
-    public static final String EXTRA_NEW_ENTRY = "ie.iadt.scalka.diary.list_fragment.diary";
     private DiaryEntry mDiaryEntry;
     private EditText mTitleField;
     private Button mDateButton;
@@ -45,6 +38,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     private ImageView mPhotoView;
     private File mPhotoFile;
     private CheckBox mSwitch;
+    private Button mSaveButton;
     public static final int REQUEST_PHOTO = 2;
 
     @Override
@@ -56,7 +50,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         mPhotoFile = DiaryModel.get(getActivity()).getPhotoFile(mDiaryEntry); //grabbing photo file location
     }
     @Override
-    //create and configure fragment's view, not in onCreat() (activities use onCreate())
+    //create and configure fragment's view, not in onCreate() (activities use onCreate())
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_diary_entry, parent, false);
         mTitleField = (EditText)v.findViewById(R.id.entry_title);
@@ -67,11 +61,9 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     // taking pictures
         mPhotoView = (ImageView)v.findViewById(R.id.entry_photo);
         mPhotoButton = (ImageButton)v.findViewById(R.id.entry_camera);
-
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         boolean canTakePhoto = mPhotoFile != null;
         mPhotoButton.setEnabled(canTakePhoto);
-
         if (canTakePhoto){
             Uri uri = Uri.fromFile(mPhotoFile);
             captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
@@ -84,7 +76,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         });
         updatePhotoView(mPhotoFile);
     // end of taking pictures
-
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -102,7 +93,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
                 // not used method but has to be here
             }
         });
-
         mEntryField = (EditText)v.findViewById(R.id.entry_entry);
         mEntryField.setText(mDiaryEntry.getEntry());
         mEntryField.addTextChangedListener(new TextWatcher() {
@@ -144,17 +134,25 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         mDateButton.setText(mDiaryEntry.getDate().toString());
         mDateButton.setEnabled(false);
 
+        mSaveButton = (Button)v.findViewById(R.id.save_btn);
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), DiaryListActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return v;
     }
-
     public void updatePhotoView(File mPhotoFile){
         if (mPhotoFile == null || !mPhotoFile.exists()){
-            mPhotoView.setImageDrawable(null);
+            mPhotoView.setImageDrawable(getResources().getDrawable(R.drawable.picture));
         } else {
             Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
             mPhotoView.setImageBitmap(bitmap);
         }
-        Log.d("diary fragmn", "onactivity result");
     }
 
     @Override

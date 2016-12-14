@@ -38,7 +38,6 @@ public class DiaryListFragment extends Fragment {
     private static final String TAG = "DiaryListFragment";
     private ArrayList<DiaryEntry> mDiaryEntries;
     private DiaryAdapter mAdapter;
-    private File mPhotoFile;
     public ImageView mImageView;
 
 
@@ -73,12 +72,12 @@ public class DiaryListFragment extends Fragment {
     }
 
     public class DiaryHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView mTitleTextView;
-        public TextView mDateTextView;
+        TextView mTitleTextView;
+        private TextView mDateTextView;
 
         private DiaryEntry mDiaryEntry;
 
-        public DiaryHolder(View itemView) {
+        DiaryHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView)itemView.findViewById(R.id.diary_list_item_titleTextView);
@@ -90,24 +89,31 @@ public class DiaryListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Log.d(TAG, mDiaryEntry.getId() + " was clicked");
-            Intent intent = new Intent(getActivity(), DiaryActivity.class);
+            Intent intent;
+            intent = new Intent(getActivity(), DiaryActivity.class);
             intent.putExtra(DiaryFragment.EXTRA_DIARY_ID, mDiaryEntry.getId());
             startActivity(intent);
         }
 
-        public void bindDiaryEntry(DiaryEntry de){
+        void bindDiaryEntry(DiaryEntry de){
             mDiaryEntry = de;
             mTitleTextView.setText(de.getTitle());
             mDateTextView.setText(de.getDate());
-            mPhotoFile = DiaryModel.get(getActivity()).getPhotoFile(mDiaryEntry); //grabbing photo file location
-            Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
-            mImageView.setImageBitmap(bitmap);
+            File mPhotoFile = DiaryModel.get(getActivity()).getPhotoFile(mDiaryEntry);
+            //Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+            if (mPhotoFile == null || !mPhotoFile.exists()){
+                mImageView.setImageDrawable(getResources().getDrawable(R.drawable.picture));
+            } else {
+                Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
+                mImageView.setImageBitmap(bitmap);
+            }
+
         }
     }
 
     private class DiaryAdapter extends RecyclerView.Adapter<DiaryHolder> implements SimpleItemTouchHelperCallback.ItemTouchHelperAdapter{
         private ArrayList<DiaryEntry> mDiaryEntries;
-        public DiaryAdapter(ArrayList<DiaryEntry> diaryEntries){
+        DiaryAdapter(ArrayList<DiaryEntry> diaryEntries){
             mDiaryEntries = diaryEntries;
         }
 
@@ -174,8 +180,6 @@ public class DiaryListFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), DiaryActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.menu_item_delete:
-               // DiaryModel.deleteEntry(1);
             default:
                 return super.onOptionsItemSelected(item);
 

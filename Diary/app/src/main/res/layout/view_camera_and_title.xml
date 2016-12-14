@@ -2,16 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginLeft="16dp"
               android:layout_marginTop="16dp">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
     >
 
         <ImageView
+            android:contentDescription="camera image"
             android:id="@+id/entry_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -20,6 +23,7 @@
             android:scaleType="centerInside"
         />
         <ImageButton
+            android:contentDescription="camera button"
             android:id="@+id/entry_camera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,6 +44,7 @@
             android:id="@+id/entry_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:hint="@string/entry_title_hint"/>
         <Button
