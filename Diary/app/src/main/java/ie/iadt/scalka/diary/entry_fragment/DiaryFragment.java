@@ -9,6 +9,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,11 +27,12 @@ import java.io.File;
 import java.util.ArrayList;
 
 import ie.iadt.scalka.diary.R;
+import ie.iadt.scalka.diary.list_fragment.DiaryListActivity;
+import ie.iadt.scalka.diary.list_fragment.DiaryListFragment;
 import ie.iadt.scalka.diary.model.DiaryEntry;
 import ie.iadt.scalka.diary.model.DiaryModel;
 import ie.iadt.scalka.diary.pictures.PictureUtils;
 
-import static android.app.Activity.RESULT_OK;
 
 public class DiaryFragment extends android.support.v4.app.Fragment {
     public static final String EXTRA_DIARY_ID = "ie.iadt.scalka.diary.list_fragment.diary_id";
@@ -46,6 +50,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true); // telling that the function onCreteOptionsMenu should be called
         String entryId = getActivity().getIntent().getStringExtra(EXTRA_DIARY_ID);
         mDiaryEntry = DiaryModel.get(getActivity()).getDiaryEntry(entryId);
         mPhotoFile = DiaryModel.get(getActivity()).getPhotoFile(mDiaryEntry); //grabbing photo file location
@@ -156,5 +161,25 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     public void onResume(){
         super.onResume();
         updatePhotoView(mPhotoFile);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.entry_diary_menu, menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.menu_item_delete:
+                DiaryModel.get(getActivity()).deleteEntry(mDiaryEntry.getId());
+                Log.d("delete", "deleting");
+                Intent intent = new Intent(getActivity(), DiaryListActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

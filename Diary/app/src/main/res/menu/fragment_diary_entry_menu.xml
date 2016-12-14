@@ -5,9 +5,4 @@
           android:icon="@android:drawable/ic_menu_add"
           android:title="@string/new_entry"
           app:showAsAction="ifRoom"/>
-    <item android:id="@+id/menu_item_delete"
-        android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/new_entry"
-        app:showAsAction="ifRoom"/>
-
 </menu>

@@ -135,9 +135,8 @@ public class DiaryModel {
         getmDiaryEntry().add(de);
     }
 
-    public boolean deleteEntry(int rowId){
+    public boolean deleteEntry(String rowId){
         Log.d("diarymodel deleteentry", "deleeeeeting entry");
-
         return mDatabase.delete(DiaryTable.TABLE_ENTRIES, DiaryTable.COLUMN_ID + "=" + rowId, null) > 0;
     }
 
