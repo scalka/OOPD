@@ -61,11 +61,15 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         mTitleField.setText(mDiaryEntry.getTitle());
         mEntryField = (EditText)v.findViewById(R.id.entry_entry);
         mEntryField.setText(mDiaryEntry.getEntry());
+        Log.d("diary", "oncreateviewwwwwwwwwwwwwwwwwww " );
         mSwitch = (CheckBox) v.findViewById(R.id.moodSwitch);
         if (mDiaryEntry.getGoodday() == 1){
+            String test = String.valueOf(mDiaryEntry.getGoodday());
+            Log.d("diary", "gooooooooooooooood moood " + test);
             mSwitch.setChecked(true);
         }
     // taking pictures
+        mPhotoView = (ImageView)v.findViewById(R.id.entry_photo);
         mPhotoButton = (ImageButton)v.findViewById(R.id.entry_camera);
 
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -80,15 +84,10 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 startActivityForResult(captureImage, REQUEST_PHOTO);
-                /**not working
-                 *
-                 *
-                 * ***/
-                onActivityResult(REQUEST_PHOTO, RESULT_OK, captureImage, (ImageView)view.findViewById(R.id.entry_photo));
             }
         });
-        mPhotoView = (ImageView)v.findViewById(R.id.entry_photo);
-        updatePhotoView();
+
+        updatePhotoView(mPhotoFile);
 
     // end of taking pictures
         mTitleField.addTextChangedListener(new TextWatcher() {
@@ -136,20 +135,28 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
 
         return v;
     }
-    public void updatePhotoView(){
+    public void updatePhotoView(File mPhotoFile){
         if (mPhotoFile == null || !mPhotoFile.exists()){
             mPhotoView.setImageDrawable(null);
         } else {
             Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
             mPhotoView.setImageBitmap(bitmap);
         }
+        Log.d("diary fragmn", "onactivity result");
     }
-
+/*
     public void onActivityResult(int requestCode, int resultCode, Intent data, ImageView view) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             view.setImageBitmap(imageBitmap);
+            Log.d("diary fragmn", "onactivity result");
         }
+    }*/
+    @Override
+    public void onResume(){
+        super.onResume();
+        updatePhotoView(mPhotoFile);
+        Log.d("diary fragmn", "onresume");
     }
 }

@@ -38,7 +38,7 @@ public class DiaryModel {
         //mDiaryEntry = new ArrayList<>();
         mDbHelper = new DiaryDbHelper(appContext);
         mDatabase = mDbHelper.getWritableDatabase();
-       seedDatabse();
+       //seedDatabse();
     }
     public void open(){
         mDatabase = mDbHelper.getReadableDatabase();
@@ -133,9 +133,11 @@ public class DiaryModel {
     public void addEntry(DiaryEntry de){
         getmDiaryEntry().add(de);
     }
-    public boolean deleteEntry(DiaryEntry de){
+
+    public boolean deleteEntry(String rowId){
         Log.d("diarymodel deleteentry", "deleeeeeting entry");
-        return mDatabase.delete(DiaryTable.TABLE_ENTRIES, DiaryTable.COLUMN_ID + "=" + de.getId(), null) > 0;
+
+        return mDatabase.delete(DiaryTable.TABLE_ENTRIES, DiaryTable.COLUMN_ID + "=" + rowId, null) > 0;
     }
 
     public DiaryEntry createEntry(DiaryEntry de){
