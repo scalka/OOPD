@@ -1,6 +1,5 @@
 package ie.iadt.scalka.diary.list_fragment;
 
-
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,15 +14,11 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.view.View;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-
 import android.content.Intent;
 import android.widget.TextView;
-
-
 import ie.iadt.scalka.diary.R;
 import ie.iadt.scalka.diary.SimpleItemTouchHelperCallback;
 import ie.iadt.scalka.diary.entry_fragment.DiaryActivity;
@@ -32,14 +27,13 @@ import ie.iadt.scalka.diary.model.DiaryEntry;
 import ie.iadt.scalka.diary.model.DiaryModel;
 import ie.iadt.scalka.diary.pictures.PictureUtils;
 
-
+/*Fragment which uses a RecyclerView to display list of DiaryEntries*/
 public class DiaryListFragment extends Fragment {
     private RecyclerView mDiaryRecyclerView;
     private static final String TAG = "DiaryListFragment";
     private ArrayList<DiaryEntry> mDiaryEntries;
     private DiaryAdapter mAdapter;
-    public ImageView mImageView;
-
+    private ImageView mImageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -53,7 +47,6 @@ public class DiaryListFragment extends Fragment {
         mDiaryEntries = DiaryModel.get(getActivity()).getmDiaryEntry();
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_diary_list, container, false);
@@ -61,7 +54,9 @@ public class DiaryListFragment extends Fragment {
         //recycler view requires a layout manager
         mDiaryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new DiaryAdapter(mDiaryEntries);
-
+        // Functionality to swipe and drag an list item, unfortunately it has no other functionality
+        // It was implemented to add delete option on the item
+        // Instead delete option is introduced in the DiaryFragment
         ItemTouchHelper.Callback callback =
                 new SimpleItemTouchHelperCallback(mAdapter);
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
@@ -70,22 +65,20 @@ public class DiaryListFragment extends Fragment {
         updateUI();
         return view;
     }
-
+    //A ViewHolder describes an item view and metadata about its place within the RecyclerView.
     public class DiaryHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView mTitleTextView;
-        private TextView mDateTextView;
-
+        final TextView mTitleTextView;
+        private final TextView mDateTextView;
         private DiaryEntry mDiaryEntry;
-
+        //ViewHolder of an item
         DiaryHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             mTitleTextView = (TextView)itemView.findViewById(R.id.diary_list_item_titleTextView);
             mDateTextView = (TextView)itemView.findViewById(R.id.diary_list_item_date);
             mImageView = (ImageView)itemView.findViewById(R.id.list_item_imageView);
-
         }
-
+        //on list item click intent is called
         @Override
         public void onClick(View view) {
             Log.d(TAG, mDiaryEntry.getId() + " was clicked");
@@ -94,25 +87,23 @@ public class DiaryListFragment extends Fragment {
             intent.putExtra(DiaryFragment.EXTRA_DIARY_ID, mDiaryEntry.getId());
             startActivity(intent);
         }
-
+        //binding data to the recycler view
         void bindDiaryEntry(DiaryEntry de){
             mDiaryEntry = de;
             mTitleTextView.setText(de.getTitle());
             mDateTextView.setText(de.getDate());
             File mPhotoFile = DiaryModel.get(getActivity()).getPhotoFile(mDiaryEntry);
-            //Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
             if (mPhotoFile == null || !mPhotoFile.exists()){
                 mImageView.setImageDrawable(getResources().getDrawable(R.drawable.picture));
             } else {
                 Bitmap bitmap = PictureUtils.getScaledBitmap(mPhotoFile.getPath(), getActivity());
                 mImageView.setImageBitmap(bitmap);
             }
-
         }
     }
-
+    //Adapters provide a binding from a data set to views that are displayed within a RecyclerView.
     private class DiaryAdapter extends RecyclerView.Adapter<DiaryHolder> implements SimpleItemTouchHelperCallback.ItemTouchHelperAdapter{
-        private ArrayList<DiaryEntry> mDiaryEntries;
+        private final ArrayList<DiaryEntry> mDiaryEntries;
         DiaryAdapter(ArrayList<DiaryEntry> diaryEntries){
             mDiaryEntries = diaryEntries;
         }
@@ -129,7 +120,7 @@ public class DiaryListFragment extends Fragment {
             DiaryEntry de = mDiaryEntries.get(position);
             holder.bindDiaryEntry(de);
         }
-
+        /*Functionality for swipe and drag*/
         @Override
         public int getItemCount() {
             return mDiaryEntries.size();
@@ -155,11 +146,11 @@ public class DiaryListFragment extends Fragment {
         @Override
         public void onItemDismiss(int position) {
             mDiaryEntries.remove(position);
-         //   DiaryModel.get(getActivity()).deleteEntry(mDiaryEntries.get(position).getId());
-            Log.d("listfr", "to be deleted " + mDiaryEntries.get(position).getId());
             notifyItemRemoved(position);
         }
+        /*the end of code for swipe and drag*/
     }
+
     @Override
     public void onResume(){
         super.onResume();
@@ -171,6 +162,7 @@ public class DiaryListFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_diary_entry_menu, menu);
     }
+    //adding new entry button
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
@@ -182,17 +174,13 @@ public class DiaryListFragment extends Fragment {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
     }
-
+    //updating UI after changes
     private void updateUI() {
         DiaryModel crimeModel = DiaryModel.get(getActivity());
         ArrayList<DiaryEntry> mDiaryEntries = crimeModel.getmDiaryEntry();
-
         mAdapter = new DiaryAdapter(mDiaryEntries);
         mDiaryRecyclerView.setAdapter(mAdapter);
     }
-
-
 }

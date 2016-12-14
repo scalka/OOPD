@@ -2,7 +2,6 @@ package ie.iadt.scalka.diary;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -18,8 +17,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
-        // fragment menager handles the list of fragments for the activity and adding therir views to the list of views for the actvity
-        // getSupportFragmentManagaer() as Support Library is used
+        // fragment manager handles the list of fragments for the activity and adding their views to the list of views for the activity
+        // getSupportFragmentManager() as Support Library is used
         FragmentManager manager = getSupportFragmentManager();
         //this container view ID tells the manager where in the activity's view the fragment should appear
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);

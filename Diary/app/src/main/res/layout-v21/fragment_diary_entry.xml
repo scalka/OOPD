@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_height="match_parent"
-              android:layout_width="match_parent"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical" android:weightSum="1">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <include layout="@layout/view_camera_and_title"></include>
 
@@ -17,12 +20,13 @@
         android:id="@+id/entry_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter an entry" android:layout_weight="0.27"
+        android:hint="@string/enter_an_entry"
+        android:layout_weight="0.27"
         style="@style/Widget.AppCompat.EditText"
         android:selectAllOnFocus="true"/>
 
     <CheckBox
-        android:text="Good Day"
+        android:text="@string/good_day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/moodSwitch"/>
@@ -37,3 +41,4 @@
 
 
 </LinearLayout>
+    </ScrollView>

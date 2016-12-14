@@ -8,30 +8,23 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
-
 import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import ie.iadt.scalka.diary.R;
 import ie.iadt.scalka.diary.database.DiaryDbHelper;
 import ie.iadt.scalka.diary.database.DiaryTable;
-import ie.iadt.scalka.diary.list_fragment.DiaryListFragment;
 
 
 public class DiaryModel {
-    // List<E> is an interface - defines methods for redaing, deleting etc from a list
-    // ArrayList is one of the implementations for the List interface - this is used instead of a Databse for the moment
-    //arraylist - gone; data is from database
-    //private static ArrayList<DiaryEntry> mDiaryEntry;
-    //s for static
-    private SQLiteDatabase mDatabase;
-    private SQLiteOpenHelper mDbHelper;
 
+    private SQLiteDatabase mDatabase;
+    private final SQLiteOpenHelper mDbHelper;
     private static DiaryModel sDiaryModel;
-    private Context mAppContext;
-    //constractor can not be called outside of class
+    private final Context mAppContext;
+
+    //constructor can not be called outside of class
     // this and get method below control the number of instances that exist for this class
     //singleton design pattern
     private DiaryModel(Context appContext){
@@ -39,7 +32,7 @@ public class DiaryModel {
         //mDiaryEntry = new ArrayList<>();
         mDbHelper = new DiaryDbHelper(appContext);
         mDatabase = mDbHelper.getWritableDatabase();
-       //seedDatabse();
+       //seedDatabase();
     }
     public void open(){
         mDatabase = mDbHelper.getReadableDatabase();
@@ -47,7 +40,7 @@ public class DiaryModel {
     public void close(){
         mDbHelper.close();
     }
-    //this get method checks to see if DiaryMOdel is null - if it is it instantiates it
+    //this get method checks to see if DiaryModel is null - if it is it instantiates it
     // otherwise it returns the instance that exists
 
     public static DiaryModel get(Context c){
@@ -61,7 +54,7 @@ public class DiaryModel {
     public ArrayList<DiaryEntry> getmDiaryEntry(){
         ArrayList<DiaryEntry> diaryEntries = new ArrayList<>();
 
-        // check the class DiaryTablefor a definition of these constants table_diaruy and all columns
+        // check the class DiaryTable for a definition of these constants table_diary and all columns
         //query() is part of the sqlitedatabase class that seeds a query to the database
         Cursor cursor = mDatabase.query(DiaryTable.TABLE_ENTRIES, DiaryTable.ALL_COLUMNS,
                 null, null, null, null, null);
@@ -110,10 +103,11 @@ public class DiaryModel {
                     cursor.getColumnIndex(DiaryTable.COLUMN_GOODDAY)
             ));
         }
+        cursor.close();
         return de;
     }
     //populate the database
-   public void seedDatabse(){
+   public void seedDatabase(){
         DiaryEntry de = new DiaryEntry();
 
         for(int i=0; i<10; i++){
@@ -136,18 +130,17 @@ public class DiaryModel {
     }
 
     public boolean deleteEntry(String rowId){
-        Log.d("diarymodel deleteentry", "deleeeeeting entry");
         return mDatabase.delete(DiaryTable.TABLE_ENTRIES, DiaryTable.COLUMN_ID + "=" + rowId, null) > 0;
     }
 
-    public DiaryEntry createEntry(DiaryEntry de){
+    private DiaryEntry createEntry(DiaryEntry de){
         ContentValues values = de.toValues();
         mDatabase.insert(DiaryTable.TABLE_ENTRIES, null, values);
         return de;
     }
     public void updateDiaryEntry(DiaryEntry de){
         ContentValues values = de.toValues();
-        int result = mDatabase.update(DiaryTable.TABLE_ENTRIES, values, "id = ?", new String[] {de.getId()});
+        mDatabase.update(DiaryTable.TABLE_ENTRIES, values, "id = ?", new String[] {de.getId()});
     }
     //this function returns objects that point to the right locations and it verifies if there is an external storage to write to
     public File getPhotoFile(DiaryEntry de){
