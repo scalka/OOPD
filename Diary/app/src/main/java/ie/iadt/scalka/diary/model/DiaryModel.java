@@ -132,6 +132,7 @@ public class DiaryModel {
     public void addEntry(DiaryEntry de){
         getmDiaryEntry().add(de);
     }
+
     public void deleteEntry(DiaryEntry de){
         getmDiaryEntry().remove(de);
     }
@@ -145,6 +146,7 @@ public class DiaryModel {
         ContentValues values = de.toValues();
         int result = mDatabase.update(DiaryTable.TABLE_ENTRIES, values, "id = ?", new String[] {de.getId()});
     }
+
     //this function returns objects that point to the right locations and it verifies if there is an external storage to write to
     public File getPhotoFile(DiaryEntry de){
         File externalFilesDir = mAppContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);

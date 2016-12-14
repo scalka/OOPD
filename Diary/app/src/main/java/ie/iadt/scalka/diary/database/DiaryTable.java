@@ -27,4 +27,7 @@ public class DiaryTable {
 
     public static final String SQL_DELETE =
             "DROP TABLE " + TABLE_ENTRIES;
+
+    public static final String DELETE_ENTRY =
+            "DELETE FROM " + TABLE_ENTRIES + " WHERE " + COLUMN_ID +" = ? " ;
 }

@@ -4,6 +4,7 @@ package ie.iadt.scalka.diary.list_fragment;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -84,9 +85,7 @@ public class DiaryListFragment extends Fragment {
             mTitleTextView = (TextView)itemView.findViewById(R.id.diary_list_item_titleTextView);
             mDateTextView = (TextView)itemView.findViewById(R.id.diary_list_item_date);
             mImageView = (ImageView)itemView.findViewById(R.id.list_item_imageView);
-
         }
-
         @Override
         public void onClick(View view) {
             Log.d(TAG, mDiaryEntry.getId() + " was clicked");
@@ -107,6 +106,7 @@ public class DiaryListFragment extends Fragment {
 
     private class DiaryAdapter extends RecyclerView.Adapter<DiaryHolder> implements SimpleItemTouchHelperCallback.ItemTouchHelperAdapter{
         private ArrayList<DiaryEntry> mDiaryEntries;
+
         public DiaryAdapter(ArrayList<DiaryEntry> diaryEntries){
             mDiaryEntries = diaryEntries;
         }
@@ -114,6 +114,12 @@ public class DiaryListFragment extends Fragment {
         public DiaryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.list_item_diary, parent, false);
+            /*item animation code*/
+            RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+            itemAnimator.setAddDuration(1000);
+            itemAnimator.setRemoveDuration(1000);
+            mDiaryRecyclerView.setItemAnimator(itemAnimator);
+
             return new DiaryHolder(view);
         }
 
@@ -121,14 +127,12 @@ public class DiaryListFragment extends Fragment {
         public void onBindViewHolder(DiaryHolder holder, int position) {
             DiaryEntry de = mDiaryEntries.get(position);
             holder.bindDiaryEntry(de);
-
-
         }
-
         @Override
         public int getItemCount() {
             return mDiaryEntries.size();
         }
+
         /*ItemTouch methods
         * call notifyItemRemoved() and notifyItemMoved() so the Adapter is aware of the changes
         * It’s also important to note that we’re changing the position of the item every time the view is shifted to a new index*/
@@ -152,6 +156,7 @@ public class DiaryListFragment extends Fragment {
             mDiaryEntries.remove(position);
             DiaryModel.get(getActivity()).deleteEntry(mDiaryEntries.get(position));
             notifyItemRemoved(position);
+            notifyItemRangeChanged(position, getItemCount());
         }
     }
     @Override
@@ -183,7 +188,6 @@ public class DiaryListFragment extends Fragment {
     private void updateUI() {
         DiaryModel crimeModel = DiaryModel.get(getActivity());
         ArrayList<DiaryEntry> mDiaryEntries = crimeModel.getmDiaryEntry();
-
         mAdapter = new DiaryAdapter(mDiaryEntries);
         mDiaryRecyclerView.setAdapter(mAdapter);
     }
