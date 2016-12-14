@@ -42,16 +42,13 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
     private File mPhotoFile;
     private CheckBox mSwitch;
     public static final int REQUEST_PHOTO = 2;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         String entryId = getActivity().getIntent().getStringExtra(EXTRA_DIARY_ID);
-        //Log.d("diaryfragment", entryId);
         mDiaryEntry = DiaryModel.get(getActivity()).getDiaryEntry(entryId);
         mPhotoFile = DiaryModel.get(getActivity()).getPhotoFile(mDiaryEntry); //grabbing photo file location
-        //mDiaryEntry = new DiaryEntry();
     }
     @Override
     //create and configure fragment's view, not in onCreat() (activities use onCreate())
@@ -61,13 +58,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         mTitleField.setText(mDiaryEntry.getTitle());
         mEntryField = (EditText)v.findViewById(R.id.entry_entry);
         mEntryField.setText(mDiaryEntry.getEntry());
-        Log.d("diary", "oncreateviewwwwwwwwwwwwwwwwwww " );
-        mSwitch = (CheckBox) v.findViewById(R.id.moodSwitch);
-        if (mDiaryEntry.getGoodday() == 1){
-            String test = String.valueOf(mDiaryEntry.getGoodday());
-            Log.d("diary", "gooooooooooooooood moood " + test);
-            mSwitch.setChecked(true);
-        }
+
     // taking pictures
         mPhotoView = (ImageView)v.findViewById(R.id.entry_photo);
         mPhotoButton = (ImageButton)v.findViewById(R.id.entry_camera);
@@ -86,10 +77,9 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
                 startActivityForResult(captureImage, REQUEST_PHOTO);
             }
         });
-
         updatePhotoView(mPhotoFile);
-
     // end of taking pictures
+
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -113,6 +103,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         mEntryField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
                 mDiaryEntry.setEntry(charSequence.toString());
                 DiaryModel diaryModel = DiaryModel.get(getActivity());
                 diaryModel.updateDiaryEntry(mDiaryEntry);
@@ -127,14 +118,30 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
                 // not used method but has to be here
             }
         });
+        mSwitch = (CheckBox) v.findViewById(R.id.moodSwitch);
+        mSwitch.setChecked(mDiaryEntry.getGoodday() == 1);
+        mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if ( checked == true ){
+                    mDiaryEntry.setGoodday(1);
+                    Log.d("diary", "true");
+                } else {
+                    mDiaryEntry.setGoodday(0);
+                    Log.d("diary", "else");
+                }
+                DiaryModel diaryModel = DiaryModel.get(getActivity());
+                diaryModel.updateDiaryEntry(mDiaryEntry);
 
-
+            }
+        });
         mDateButton = (Button)v.findViewById(R.id.dataPickerButton);
         mDateButton.setText(mDiaryEntry.getDate().toString());
         mDateButton.setEnabled(false);
 
         return v;
     }
+
     public void updatePhotoView(File mPhotoFile){
         if (mPhotoFile == null || !mPhotoFile.exists()){
             mPhotoView.setImageDrawable(null);
@@ -144,19 +151,10 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         }
         Log.d("diary fragmn", "onactivity result");
     }
-/*
-    public void onActivityResult(int requestCode, int resultCode, Intent data, ImageView view) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            view.setImageBitmap(imageBitmap);
-            Log.d("diary fragmn", "onactivity result");
-        }
-    }*/
+
     @Override
     public void onResume(){
         super.onResume();
         updatePhotoView(mPhotoFile);
-        Log.d("diary fragmn", "onresume");
     }
 }

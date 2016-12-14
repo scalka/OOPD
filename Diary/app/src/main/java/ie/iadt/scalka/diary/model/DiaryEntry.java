@@ -16,7 +16,7 @@ public class DiaryEntry {
     private String mEntry;
     private String mDate;
     private Picture mPicture;
-    private boolean mGoodDay;
+
     private int mGoodday;
 
     //Constructor
@@ -66,12 +66,12 @@ public class DiaryEntry {
         return mTitle;
     }
     public ContentValues toValues(){
-        ContentValues values = new ContentValues(4);
+        ContentValues values = new ContentValues(5);
         values.put(DiaryTable.COLUMN_ID, mId);
         values.put(DiaryTable.COLUMN_TITLE, mTitle);
         values.put(DiaryTable.COLUMN_DATE, mDate);
         values.put(DiaryTable.COLUMN_ENTRY, mEntry);
-
+        values.put(DiaryTable.COLUMN_GOODDAY, mGoodday);
         return values;
     }
 }

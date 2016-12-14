@@ -17,6 +17,7 @@ import java.util.Date;
 import ie.iadt.scalka.diary.R;
 import ie.iadt.scalka.diary.database.DiaryDbHelper;
 import ie.iadt.scalka.diary.database.DiaryTable;
+import ie.iadt.scalka.diary.list_fragment.DiaryListFragment;
 
 
 public class DiaryModel {
@@ -38,7 +39,7 @@ public class DiaryModel {
         //mDiaryEntry = new ArrayList<>();
         mDbHelper = new DiaryDbHelper(appContext);
         mDatabase = mDbHelper.getWritableDatabase();
-       //seedDatabse();
+       seedDatabse();
     }
     public void open(){
         mDatabase = mDbHelper.getReadableDatabase();
@@ -134,7 +135,7 @@ public class DiaryModel {
         getmDiaryEntry().add(de);
     }
 
-    public boolean deleteEntry(String rowId){
+    public boolean deleteEntry(int rowId){
         Log.d("diarymodel deleteentry", "deleeeeeting entry");
 
         return mDatabase.delete(DiaryTable.TABLE_ENTRIES, DiaryTable.COLUMN_ID + "=" + rowId, null) > 0;

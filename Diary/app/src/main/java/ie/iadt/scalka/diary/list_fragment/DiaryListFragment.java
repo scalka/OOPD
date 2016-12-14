@@ -72,7 +72,7 @@ public class DiaryListFragment extends Fragment {
         return view;
     }
 
-    private class DiaryHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class DiaryHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView mTitleTextView;
         public TextView mDateTextView;
 
@@ -110,6 +110,7 @@ public class DiaryListFragment extends Fragment {
         public DiaryAdapter(ArrayList<DiaryEntry> diaryEntries){
             mDiaryEntries = diaryEntries;
         }
+
         @Override
         public DiaryHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
@@ -121,8 +122,6 @@ public class DiaryListFragment extends Fragment {
         public void onBindViewHolder(DiaryHolder holder, int position) {
             DiaryEntry de = mDiaryEntries.get(position);
             holder.bindDiaryEntry(de);
-
-
         }
 
         @Override
@@ -150,7 +149,8 @@ public class DiaryListFragment extends Fragment {
         @Override
         public void onItemDismiss(int position) {
             mDiaryEntries.remove(position);
-            DiaryModel.get(getActivity()).deleteEntry(mDiaryEntries.get(position).getId());
+         //   DiaryModel.get(getActivity()).deleteEntry(mDiaryEntries.get(position).getId());
+            Log.d("listfr", "to be deleted " + mDiaryEntries.get(position).getId());
             notifyItemRemoved(position);
         }
     }
@@ -174,6 +174,8 @@ public class DiaryListFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), DiaryActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.menu_item_delete:
+               // DiaryModel.deleteEntry(1);
             default:
                 return super.onOptionsItemSelected(item);
 
