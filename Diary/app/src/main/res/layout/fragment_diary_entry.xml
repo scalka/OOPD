@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_height="match_parent"
-              android:layout_width="match_parent"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical" android:weightSum="1">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <include layout="@layout/view_camera_and_title"></include>
-
-    <!--style says to go to style folder and apply particular style-->
-
-   <!-- <EditText
-        android:id="@+id/entry_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter a title for the entry"/>
--->
-    <!--btn ist gonna be set to open datapicker-->
-
 
     <TextView
         android:text="@string/new_entry_textview"
@@ -28,11 +21,13 @@
         android:id="@+id/entry_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter an entry" android:layout_weight="0.27"
+        android:hint="@string/enter_an_entry"
+        android:layout_weight="0.27"
         style="@style/Widget.AppCompat.EditText"
         android:selectAllOnFocus="true"/>
+
     <CheckBox
-        android:text="CheckBox"
+        android:text="@string/good_day_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/moodSwitch"/>
@@ -41,5 +36,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" android:id="@+id/save_btn"/>
 
+    <Button
+        android:text="@string/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/save_btn"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:elevation="0dp" />
+
 
 </LinearLayout>
+</ScrollView>

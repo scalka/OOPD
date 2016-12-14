@@ -1,13 +1,14 @@
 package ie.iadt.scalka.diary.database;
+
 /* This class defines the Table myentry*/
 public class DiaryTable {
     //define db name
     public static final String DB_NAME = "myentry.db";
-    //version changes with onUprgade method
+    //version changes with onUpgrade method
     public static final int VERSION = 1;
     //name of the table
     public static final String TABLE_ENTRIES = "myentry";
-    //definde the columns
+    //define the columns
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_DATE = "date";
@@ -24,7 +25,7 @@ public class DiaryTable {
                     COLUMN_DATE + " TEXT, " +
                     COLUMN_ENTRY + " TEXT, " +
                     COLUMN_GOODDAY + " INTEGER" + ")";
-
+    //SQL to delete table
     public static final String SQL_DELETE =
             "DROP TABLE " + TABLE_ENTRIES;
 
