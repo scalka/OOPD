@@ -7,7 +7,7 @@ import android.graphics.Point;
 
 public class PictureUtils {
 
-    //writing conservative scale method - checks how big is the screen and scales img to that size
+    //writing scale method - checks how big is the screen and scales img to that size since camera takes large images
     public static Bitmap getScaledBitmap(String path, Activity activity){
         Point size = new Point();
         activity.getWindowManager().getDefaultDisplay().getSize(size);

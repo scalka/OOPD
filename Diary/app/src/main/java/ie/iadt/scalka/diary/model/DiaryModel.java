@@ -16,7 +16,6 @@ import ie.iadt.scalka.diary.R;
 import ie.iadt.scalka.diary.database.DiaryDbHelper;
 import ie.iadt.scalka.diary.database.DiaryTable;
 
-
 public class DiaryModel {
 
     private SQLiteDatabase mDatabase;
@@ -25,14 +24,14 @@ public class DiaryModel {
     private final Context mAppContext;
 
     //constructor can not be called outside of class
-    // this and get method below control the number of instances that exist for this class
+    //this and get method below control the number of instances that exist for this class
     //singleton design pattern
     private DiaryModel(Context appContext){
         mAppContext = appContext;
         //mDiaryEntry = new ArrayList<>();
         mDbHelper = new DiaryDbHelper(appContext);
         mDatabase = mDbHelper.getWritableDatabase();
-       //seedDatabase();
+       seedDatabase();
     }
     public void open(){
         mDatabase = mDbHelper.getReadableDatabase();
@@ -42,7 +41,6 @@ public class DiaryModel {
     }
     //this get method checks to see if DiaryModel is null - if it is it instantiates it
     // otherwise it returns the instance that exists
-
     public static DiaryModel get(Context c){
         if(sDiaryModel == null){
             sDiaryModel = new DiaryModel(c.getApplicationContext());
@@ -81,7 +79,7 @@ public class DiaryModel {
         cursor.close();
         return diaryEntries;
     }
-
+    // getting diary entry with particular id
     public DiaryEntry getDiaryEntry(String id){
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM myentry WHERE id=?", new String[] {id+""});
         DiaryEntry de = new DiaryEntry();
@@ -124,20 +122,21 @@ public class DiaryModel {
             }
         }
     }
-
+    //adding new entry
     public void addEntry(DiaryEntry de){
         getmDiaryEntry().add(de);
     }
-
+    //deleting entry
     public boolean deleteEntry(String rowId){
         return mDatabase.delete(DiaryTable.TABLE_ENTRIES, DiaryTable.COLUMN_ID + "=" + rowId, null) > 0;
     }
-
+    //creating new entry
     private DiaryEntry createEntry(DiaryEntry de){
         ContentValues values = de.toValues();
         mDatabase.insert(DiaryTable.TABLE_ENTRIES, null, values);
         return de;
     }
+    //updating entry
     public void updateDiaryEntry(DiaryEntry de){
         ContentValues values = de.toValues();
         mDatabase.update(DiaryTable.TABLE_ENTRIES, values, "id = ?", new String[] {de.getId()});

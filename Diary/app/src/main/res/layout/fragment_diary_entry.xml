@@ -3,43 +3,43 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
-
-    <include layout="@layout/view_camera_and_title"></include>
-
-    <TextView
-        android:text="@string/new_entry_textview"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/NewEntry"
-        style="?android:listSeparatorTextViewStyle"/>
-    <EditText
-        android:id="@+id/entry_entry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/enter_an_entry"
-        android:layout_weight="0.27"
-        style="@style/Widget.AppCompat.EditText"
-        android:selectAllOnFocus="true"/>
+        android:orientation="vertical"
+        android:weightSum="1">
 
-    <CheckBox
-        android:text="@string/good_day_checkbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/moodSwitch"/>
+        <include layout="@layout/view_camera_and_title"></include>
 
-    <Button
-        android:text="@string/save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/save_btn"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:elevation="0dp" />
+        <TextView
+            android:text="@string/new_entry_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/NewEntry"
+            style="?android:listSeparatorTextViewStyle"/>
+        <EditText
+            android:id="@+id/entry_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_an_entry"
+            android:layout_weight="0.27"
+            style="@style/Widget.AppCompat.EditText"
+            android:selectAllOnFocus="true"/>
+
+        <CheckBox
+            android:text="@string/good_day_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/moodSwitch"/>
+
+        <Button
+            android:text="@string/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/save_btn"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:elevation="0dp" />
 
 
-</LinearLayout>
+    </LinearLayout>
 </ScrollView>

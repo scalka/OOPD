@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * This class is abstract – you never want to instantiate it.
- * You can only inherit the code in a subclass.
+ * This class is an abstract it should never be instantiated
+ * The code can be inherited in a subclass.
  */
 public abstract class SingleFragmentActivity extends AppCompatActivity{
     //createFragment() will be implemented to CrimeActivity code to create the appropriate Fragment
@@ -22,9 +22,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity{
         FragmentManager manager = getSupportFragmentManager();
         //this container view ID tells the manager where in the activity's view the fragment should appear
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
-
         if (fragment == null){
-           // fragment = new DiaryFragment();
             fragment = createFragment();
             manager.beginTransaction()
                     //add() creates and commits a fragment transaction
@@ -32,5 +30,4 @@ public abstract class SingleFragmentActivity extends AppCompatActivity{
                     .commit();
         }
     }
-
 }

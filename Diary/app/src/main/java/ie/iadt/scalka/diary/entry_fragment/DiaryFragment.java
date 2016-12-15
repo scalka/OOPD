@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -43,6 +44,9 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
         String entryId = getActivity().getIntent().getStringExtra(EXTRA_DIARY_ID); // getting extra from the intent
         mDiaryEntry = DiaryModel.get(getActivity()).getDiaryEntry(entryId); // getting diary entry
         mPhotoFile = DiaryModel.get(getActivity()).getPhotoFile(mDiaryEntry); //grabbing photo file location
+        //hide keyboard from the screen
+        getActivity().getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
     @Override
     //create and configure fragment's view, not in onCreate() (activities use onCreate())
@@ -111,6 +115,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
                 // not used method but has to be here
             }
         });
+        // if goodday = 1 checkbox is checked
         CheckBox mSwitch = (CheckBox) v.findViewById(R.id.moodSwitch);
         mSwitch.setChecked(mDiaryEntry.getGoodday() == 1);
         mSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -123,7 +128,6 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
                 }
                 DiaryModel diaryModel = DiaryModel.get(getActivity());
                 diaryModel.updateDiaryEntry(mDiaryEntry);
-
             }
         });
         Button mDateButton = (Button) v.findViewById(R.id.dataPickerButton);
@@ -141,7 +145,7 @@ public class DiaryFragment extends android.support.v4.app.Fragment {
 
         return v;
     }
-    //update photo in the view
+    //update photo in the imageview
     private void updatePhotoView(File mPhotoFile){
         //if photo was not taken set it to image from drawable folder
         if (mPhotoFile == null || !mPhotoFile.exists()){

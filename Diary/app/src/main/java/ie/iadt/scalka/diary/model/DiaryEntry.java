@@ -17,7 +17,7 @@ public class DiaryEntry {
 
     //Constructor
     public DiaryEntry(){
-        //setting a date
+       //setting a date
         Date date = new Date();
         mDate = DateFormat.getDateTimeInstance().format(date);
         //setting an id
@@ -57,10 +57,6 @@ public class DiaryEntry {
     }
 
     //This class is used to store a set of values
-    public String toString(){
-        return mTitle;
-    }
-
     public ContentValues toValues(){
         ContentValues values = new ContentValues(5);
         values.put(DiaryTable.COLUMN_ID, mId);

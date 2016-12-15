@@ -3,7 +3,7 @@ package ie.iadt.scalka.diary;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-
+//class helper to implement the swipe and drag functionality
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
     private final ItemTouchHelperAdapter mAdapter;
 
@@ -14,7 +14,7 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback{
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         /*ItemTouchHelper easily determine the direction of an event
-        * override getMovementFlags() to specify which directions of drags and swipes are supported*/
+        * getMovementFlags() specify which directions of drags and swipes are supported*/
         int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
         int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
         return makeMovementFlags(dragFlags, swipeFlags);
