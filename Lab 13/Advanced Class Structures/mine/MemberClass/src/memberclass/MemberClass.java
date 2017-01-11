@@ -1,21 +1,21 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Now the only purpose of the manager class is to hold information about the programmers
+they manage. Implement the Programmer class as a member object of Manager. 
+Write a method in the Manager class 
+called printSalaries() this prints a report of all the salaries.  
  */
 package memberclass;
 
-/**
- *
- * @author N00146095
- */
 public class MemberClass {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Manager manager = new Manager();
+        manager.addProgrammers("front-end", 2220);
+        manager.addProgrammers("back-end", 2000);
+        manager.addProgrammers("full-stack", 3000);
+        manager.reportProgrammers();
+        manager.printSalaries();
+        
     }
     
 }

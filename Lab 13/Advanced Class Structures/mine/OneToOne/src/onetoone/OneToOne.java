@@ -1,4 +1,5 @@
-
+/*Implement two separate classes 
+for the example above and write a test program to instantiate the classes*/
 package onetoone;
 
 public class OneToOne {
