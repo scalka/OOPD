@@ -1,3 +1,4 @@
+//MEMBER CLASS
 package com.lynda.olivepress.olives;
 
 import java.util.ArrayList;
