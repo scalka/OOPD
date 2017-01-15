@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--FrameLayout - will be the container view for a CrimeFragment  -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/fragmentContainer"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-    />
-
-<!-- this file was called activity_crime.xml however it is better named activity_fragment.xml as it represents one single fragment of any sort -->

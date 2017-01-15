@@ -1,5 +1,0 @@
-CHANGED,N:\Year 3\Object Oriented Programming Design\Labs\GeoQuiz22\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\ie\iadt\scalka\geoquiz2\MainActivity$1.class
-CHANGED,N:\Year 3\Object Oriented Programming Design\Labs\GeoQuiz22\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\ie\iadt\scalka\geoquiz2\MainActivity$3.class
-CHANGED,N:\Year 3\Object Oriented Programming Design\Labs\GeoQuiz22\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\ie\iadt\scalka\geoquiz2\MainActivity.class
-CHANGED,N:\Year 3\Object Oriented Programming Design\Labs\GeoQuiz22\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\ie\iadt\scalka\geoquiz2\MainActivity$4.class
-CHANGED,N:\Year 3\Object Oriented Programming Design\Labs\GeoQuiz22\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\ie\iadt\scalka\geoquiz2\MainActivity$2.class
