@@ -45,3 +45,86 @@ public class MovieJSONParser {
 
     }
 }
+
+
+/*
+ERROR
+JSON.typeMismatch(JSON.java:111)
+json string starts with [ then its array
+
+if json string starts with { then its object
+
+{
+	"root": {
+		"movie": [
+			{
+				"Title": "8New York, I Love You",
+				"Directors": "Fatih Akin, Yvan Attal",
+				"IMDb": "6.3",
+				"Year": "2008",
+				"Genres": "comedy, drama, romance",
+				"Photo": "1.jpg"
+			},
+			{
+				"Title": "4New York, I Love You",
+				"Directors": "Fatih Akin, Yvan Attal",
+				"IMDb": "6.3",
+				"Year": "2008",
+				"Genres": "comedy, drama, romance",
+				"Photo": "1.jpg"
+			},
+			{
+				"Title": "3New York, I Love You",
+				"Directors": "Fatih Akin, Yvan Attal",
+				"IMDb": "6.3",
+				"Year": "2008",
+				"Genres": "comedy, drama, romance",
+				"Photo": "1.jpg"
+			},
+			{
+				"Title": "2New York, I Love You",
+				"Directors": "Fatih Akin, Yvan Attal",
+				"IMDb": "6.3",
+				"Year": "2008",
+				"Genres": "comedy, drama, romance",
+				"Photo": "1.jpg"
+			}
+		]
+	}
+}
+
+
+[
+	{
+		"Title": "8New York, I Love You",
+		"Directors": "Fatih Akin, Yvan Attal",
+		"IMDb": "6.3",
+		"Year": "2008",
+		"Genres": "comedy, drama, romance",
+		"Photo": "1.jpg"
+	},
+	{
+		"Title": "4New York, I Love You",
+		"Directors": "Fatih Akin, Yvan Attal",
+		"IMDb": "6.3",
+		"Year": "2008",
+		"Genres": "comedy, drama, romance",
+		"Photo": "1.jpg"
+	},
+	{
+		"Title": "3New York, I Love You",
+		"Directors": "Fatih Akin, Yvan Attal",
+		"IMDb": "6.3",
+		"Year": "2008",
+		"Genres": "comedy, drama, romance",
+		"Photo": "1.jpg"
+	},
+	{
+		"Title": "2New York, I Love You",
+		"Directors": "Fatih Akin, Yvan Attal",
+		"IMDb": "6.3",
+		"Year": "2008",
+		"Genres": "comedy, drama, romance",
+		"Photo": "1.jpg"
+	}
+]*/

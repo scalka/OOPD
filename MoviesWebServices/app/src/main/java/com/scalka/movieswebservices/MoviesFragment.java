@@ -1,6 +1,5 @@
 package com.scalka.movieswebservices;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -22,8 +21,6 @@ import com.scalka.movieswebservices.model.Movie;
 import com.scalka.movieswebservices.parsers.MovieJSONParser;
 import com.scalka.movieswebservices.parsers.MovieXMLParser;
 
-import org.w3c.dom.Text;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,28 +32,18 @@ public class MoviesFragment extends Fragment{
     private MovieAdapter mAdapter;
     List<MyTask> tasks;
 
+    // C:\xampp\htdocs\scalka
+    //requestData("http://10.0.2.2/scalka/movies.xml");
     private static final String PHOTOS_BASE_URL = "http://10.0.2.2/scalka/photos/";
     public static final String XML_URL = "http://10.0.2.2/scalka/movies.xml";
     public static final String JSON_URL = "http://10.0.2.2/scalka/movies.json";
     HttpManager httpManager;
     List<Movie> movieList;
 
-    public static MoviesFragment newInstance(){
-        return new MoviesFragment();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-
-
-        //tasks = new ArrayList<>();
-        // C:\xampp\htdocs\scalka
-        //requestData("http://10.0.2.2/scalka/movies.xml");
-        //requestData(XML_URL);
-        //httpManager = new HttpManager();
-
     }
 
     @Override
@@ -75,25 +62,23 @@ public class MoviesFragment extends Fragment{
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        //create menu on top with buttons
         inflater.inflate(R.menu.fragment_menu, menu);
-        Log.d("here", "meeeeeeeeeeeeenu");
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
+        //starting a task when clic on button
         switch (item.getItemId()){
+            //pull xml file
             case R.id.xml_pull:
-                Log.d("MoviesFragment", "xml pull");
                 tasks = new ArrayList<>();
-                // C:\xampp\htdocs\scalka
-                //requestData("http://10.0.2.2/scalka/movies.xml");
                 requestData(XML_URL);
                 httpManager = new HttpManager();
                 return true;
+            //pull json file
             case R.id.json_pull:
-                Log.d("MoviesFragment", "json pull");
                 tasks = new ArrayList<>();
-                // C:\xampp\htdocs\scalka
-                //requestData("http://10.0.2.2/scalka/movies.xml");
                 requestData(JSON_URL);
                 httpManager = new HttpManager();
                 return true;
@@ -101,13 +86,25 @@ public class MoviesFragment extends Fragment{
                 return super.onOptionsItemSelected(item);
         }
     }
+    //updating a display in a list
+    private void updateDisplay(List<Movie> movieList) {
+        mAdapter = new MovieAdapter(movieList);
+        mMovieRecyclerView.setAdapter(mAdapter);
+    }
+    //starting a new task - requesting the data from web service
+    private void requestData(String uri){
+        MyTask task = new MyTask();
+        task.execute(uri);
+    }
 
+
+
+    //view for a single item in a list
     private class MoviesHolder extends RecyclerView.ViewHolder{
 
         public TextView mTitileTextView;
         public ImageView mImageView;
         public TextView mSecondText;
-
         private Movie mMovie;
 
         public MoviesHolder(View itemView) {
@@ -121,10 +118,9 @@ public class MoviesFragment extends Fragment{
             mMovie = movie;
             mTitileTextView.setText(mMovie.getTitle());
             mImageView.setImageBitmap(mMovie.getBitmap());
-            mSecondText.setText("heeelllo");
         }
     }
-
+    //adapter
     private class MovieAdapter extends RecyclerView.Adapter<MoviesHolder>{
 
         public MovieAdapter(List<Movie> movies){
@@ -150,22 +146,9 @@ public class MoviesFragment extends Fragment{
         }
     }
 
-    private void updateDisplay(List<Movie> movieList) {
-        Log.d("moviesfragment", String.valueOf(this.movieList));
 
-        mAdapter = new MovieAdapter(movieList);
-        mMovieRecyclerView.setAdapter(mAdapter);
 
-    }
-
-    private void requestData(String uri){
-
-        MyTask task = new MyTask();
-        task.execute(uri);
-
-    }
-
-    // <params, progress, result>
+    // extends AsyncTask <params, progress, result>
     private class MyTask extends AsyncTask<String, String, List<Movie>> {
 
         @Override
@@ -180,22 +163,19 @@ public class MoviesFragment extends Fragment{
             //getData returns a string of XML
             String content = HttpManager.getData(params[0]);
             //pass received content from manager to parser
-          /*  if (params[0] == XML_URL){
+            if (params[0] == XML_URL){
                 movieList = MovieXMLParser.parseFeed(content);
             }
 
             if (params[0] == JSON_URL){
                 movieList = MovieJSONParser.parseFeed(content);
-            }*/
+            }
 
-            movieList = MovieJSONParser.parseFeed(content);
-
-            /*//loop through movie list and make a network request for image
+            //loop through movie list and make a network request for image
             //store the image in Bitmap var in each movie object
             for (Movie movie : movieList){
                 try {
                     String imageUrl = PHOTOS_BASE_URL + movie.getPhoto();
-                    Log.d("MainLog", imageUrl);
                     InputStream in = (InputStream) new URL(imageUrl).getContent();
                     Bitmap bitmap = BitmapFactory.decodeStream(in);
                     movie.setBitmap(bitmap);
@@ -203,7 +183,7 @@ public class MoviesFragment extends Fragment{
                 } catch (Exception e){
                     e.printStackTrace();
                 }
-            }*/
+            }
             return movieList;
         }
 
@@ -219,9 +199,4 @@ public class MoviesFragment extends Fragment{
             super.onProgressUpdate(values);
         }
     }
-
-
-
-
-
 }

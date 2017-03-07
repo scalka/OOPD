@@ -1,7 +1,7 @@
 package com.scalka.movieswebservices.model;
 
 import android.graphics.Bitmap;
-
+//Model for a single movie
 public class Movie {
 
     private String title;
@@ -11,8 +11,6 @@ public class Movie {
     private String genres;
     private String photo;
     private Bitmap bitmap; //member of the Android.graphics package
-
-
 
     public String getTitle() {
         return title;
