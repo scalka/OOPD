@@ -2,4 +2,6 @@
     <string name="app_name">MoviesWebServices</string>
     <string name="movie_image">img</string>
     <string name="movie_title">title</string>
+    <string name="xml_pull">xml pull</string>
+    <string name="json_pull">json pull</string>
 </resources>

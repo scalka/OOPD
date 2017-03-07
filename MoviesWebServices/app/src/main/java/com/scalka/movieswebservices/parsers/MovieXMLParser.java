@@ -10,11 +10,9 @@ import java.util.List;
 import com.scalka.movieswebservices.model.Movie;
 
 public class MovieXMLParser {
+    static ArrayList<Movie> movieList = new ArrayList<>();
 
-    public static List<Movie> parseFeed(String content){
-
-        // Full list of flowers as you pull them out of the XML
-        List<Movie> movieList = new ArrayList<>();
+    public static ArrayList<Movie> parseFeed(String content){
 
     try {
         // Establish Variables that you need to keep track of where you are
@@ -85,9 +83,7 @@ public class MovieXMLParser {
                     }
                     break;
             }
-
             eventType = parser.next();
-
         }
 
         // return the complete list that was generated above
@@ -96,7 +92,8 @@ public class MovieXMLParser {
         e.printStackTrace();
         return null;
     }
-
-
+    }
+    public static ArrayList<Movie> getMovieList() {
+        return movieList;
     }
 }

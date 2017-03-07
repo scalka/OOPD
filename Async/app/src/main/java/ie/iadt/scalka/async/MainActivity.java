@@ -122,28 +122,18 @@ public class MainActivity extends ListActivity {
                     e.printStackTrace();
                 }
             }
-            updateDisplay();
+
             return movieList;
         }
 
-       // @Override
-        protected void onPostExecute(String result) {
-
+        @Override
+        protected void onPostExecute(List<Movie> movies) {
+            super.onPostExecute(movies);
+            updateDisplay();
         }
 
         @Override
         protected void onProgressUpdate(String... values) {
-          /*  for (int i = 0; i < values.length; i++) {
-                String value = values[i];
-                output.append(value + "\n");
-            }
-            try {
-                Thread.sleep(1250);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            mProgress.setVisibility(View.INVISIBLE);*/
-
 
         }
     }
