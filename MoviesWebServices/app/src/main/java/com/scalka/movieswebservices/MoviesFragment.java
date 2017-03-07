@@ -126,8 +126,6 @@ public class MoviesFragment extends Fragment{
     }
 
     private class MovieAdapter extends RecyclerView.Adapter<MoviesHolder>{
-        private List<Movie> movieList = MovieXMLParser.getMovieList();
-
 
         public MovieAdapter(List<Movie> movies){
             movieList = movies;
@@ -182,17 +180,19 @@ public class MoviesFragment extends Fragment{
             //getData returns a string of XML
             String content = HttpManager.getData(params[0]);
             //pass received content from manager to parser
-            if (params[0] == XML_URL){
+          /*  if (params[0] == XML_URL){
                 movieList = MovieXMLParser.parseFeed(content);
             }
 
             if (params[0] == JSON_URL){
                 movieList = MovieJSONParser.parseFeed(content);
-            }
+            }*/
 
-            //loop through movie list and make a network request for image
+            movieList = MovieJSONParser.parseFeed(content);
+
+            /*//loop through movie list and make a network request for image
             //store the image in Bitmap var in each movie object
-/*            for (Movie movie : movieList){
+            for (Movie movie : movieList){
                 try {
                     String imageUrl = PHOTOS_BASE_URL + movie.getPhoto();
                     Log.d("MainLog", imageUrl);
@@ -208,10 +208,10 @@ public class MoviesFragment extends Fragment{
         }
 
         @Override
-        protected void onPostExecute(List<Movie> movies) {
-            super.onPostExecute(movies);
+        protected void onPostExecute(List<Movie> movieList) {
+            super.onPostExecute(movieList);
 
-            updateDisplay(movies);
+            updateDisplay(movieList);
         }
 
         @Override

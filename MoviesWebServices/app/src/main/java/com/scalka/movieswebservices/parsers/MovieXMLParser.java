@@ -68,7 +68,7 @@ public class MovieXMLParser {
                             case "Directors":
                                 movie.setDirectors(parser.getText());
                                 break;
-                            case "Rating" :
+                            case "IMDb" :
                                 movie.setRating(Double.parseDouble(parser.getText()));
                                 break;
                             case "Year" :
@@ -93,7 +93,5 @@ public class MovieXMLParser {
         return null;
     }
     }
-    public static ArrayList<Movie> getMovieList() {
-        return movieList;
-    }
+
 }
