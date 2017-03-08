@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Permissions</string>
+    <string name="action_get_data">Get Data</string>
+    <string name="flower_name_placeholder">Flower Name</string>
+</resources>
