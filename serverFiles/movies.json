@@ -1,0 +1,74 @@
+[
+         {
+            "Title": "Perfetti sconosciuti",
+            "Directors": "Paolo Genovese",
+            "Rating": "7.7",
+            "Year": "2016",
+            "Genres": "comedy, drama",
+            "Photo": "1.jpg"
+         },
+         {
+            "Title": "La La Land",
+            "Directors": "Damien Chazelle",
+            "Rating": "8.5",
+            "Year": "2016",
+            "Genres": "comedy, drama, musical, romance",
+            "Photo": "2.jpg"
+         },
+         {
+            "Title": "Miss Peregrines Home for Peculiar Children",
+            "Directors": "Tim Burton",
+            "Rating": "6.8",
+            "Year": "2016",
+            "Genres": "adventure, drama, family, fantasy",
+            "Photo": "2.jpg"
+         },
+         {
+            "Title": "Sully",
+            "Directors": "Clint Eastwood",
+            "Rating": "7.5",
+            "Year": "2016",
+            "Genres": "adventure, drama, family, fantasy",
+            "Photo": "2.jpg"
+         },
+         {
+            "Title": "The OA",
+            "Directors": "",
+            "Rating": "7.9",
+            "Year": "2016",
+            "Genres": "drama, fantasy, mystery, sci_fi",
+            "Photo": "2.jpg"
+         },
+         {
+            "Title": "The Avengers",
+            "Directors": "Joss Whedon",
+            "Rating": "8.1",
+            "Year": "2012",
+            "Genres": "action, sci_fi",
+            "Photo": "3.jpg"
+         },
+         {
+            "Title": "Pirates of the Caribbean: At World's End",
+            "Directors": "Gore Verbinski",
+            "Rating": "7.1",
+            "Year": "2007",
+            "Genres": "action, adventure, fantasy",
+            "Photo": "3.jpg"
+         },
+         {
+            "Title": "V for Vendetta",
+            "Directors": "James McTeigue",
+            "Rating": "8.2",
+            "Year": "2005",
+            "Genres": "action, drama, thriller",
+            "Photo": "3.jpg"
+         },
+         {
+            "Title": "Shutter Island",
+            "Directors": "Martin Scorsese",
+            "Rating": "8.1",
+            "Year": "2010",
+            "Genres": "mystery, thriller",
+            "Photo": "3.jpg"
+         }
+]

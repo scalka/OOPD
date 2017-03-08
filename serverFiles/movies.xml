@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <movie>
+    <Title>Perfetti sconosciuti</Title>
+    <Directors>Paolo Genovese</Directors>
+    <Rating>7.7</Rating>
+    <Year>2016</Year>
+    <Genres>comedy, drama</Genres>
+    <Photo>1.jpg</Photo>
+  </movie>
+  <movie>
+    <Title>La La Land</Title>
+    <Directors>Damien Chazelle</Directors>
+    <Rating>8.5</Rating>
+    <Year>2016</Year>
+    <Genres>comedy, drama, musical, romance</Genres>
+    <Photo>2.jpg</Photo>
+  </movie>
+  <movie>
+    <Title>Miss Peregrines Home for Peculiar Children</Title>
+    <Directors>Tim Burton</Directors>
+    <Rating>6.8</Rating>
+    <Year>2016</Year>
+    <Genres>adventure, drama, family, fantasy</Genres>
+    <Photo>2.jpg</Photo>
+  </movie>
+  <movie>
+    <Title>Sully</Title>
+    <Directors>Clint Eastwood</Directors>
+    <Rating>7.5</Rating>
+    <Year>2016</Year>
+    <Genres>adventure, drama, family, fantasy</Genres>
+    <Photo>2.jpg</Photo>
+  </movie>
+  <movie>
+    <Title>The OA</Title>
+    <Directors></Directors>
+    <Rating>7.9</Rating>
+    <Year>2016</Year>
+    <Genres>drama, fantasy, mystery, sci_fi</Genres>
+    <Photo>2.jpg</Photo>
+  </movie>
+ <movie>
+    <Title>The Avengers</Title>
+    <Directors>Joss Whedon</Directors>
+    <Rating>8.1</Rating>
+    <Year>2012</Year>
+    <Genres>action, sci_fi</Genres>
+    <Photo>3.jpg</Photo>
+  </movie>
+  <movie>
+    <Title>Pirates of the Caribbean: At World&apos;s End</Title>
+    <Directors>Gore Verbinski</Directors>
+    <Rating>7.1</Rating>
+    <Year>2007</Year>
+    <Genres>action, adventure, fantasy</Genres>
+    <Photo>3.jpg</Photo>
+  </movie>
+  <movie>
+    <Title>V for Vendetta</Title>
+    <Directors>James McTeigue</Directors>
+    <Rating>8.2</Rating>
+    <Year>2005</Year>
+    <Genres>action, drama, thriller</Genres>
+    <Photo>3.jpg</Photo>
+  </movie>
+  <movie>
+    <Title>Shutter Island</Title>
+    <Directors>Martin Scorsese</Directors>
+    <Rating>8.1</Rating>
+    <Year>2010</Year>
+    <Genres>mystery, thriller</Genres>
+    <Photo>3.jpg</Photo>
+  </movie>
+</root>
