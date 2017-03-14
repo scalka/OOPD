@@ -63,6 +63,7 @@ public class Movie {
     public Bitmap getBitmap(){
         return bitmap;
     };
+
     public void setBitmap(Bitmap bitmap){
         this.bitmap = bitmap;
     }

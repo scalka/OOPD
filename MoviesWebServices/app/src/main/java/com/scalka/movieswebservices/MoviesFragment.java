@@ -55,7 +55,6 @@ public class MoviesFragment extends Fragment{
         mMovieRecyclerView = (RecyclerView) v.findViewById(R.id.fragment_movies_recycler_view);
         mMovieRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mMovieRecyclerView.setAdapter(mAdapter);
-
         return v;
     }
 
@@ -64,11 +63,10 @@ public class MoviesFragment extends Fragment{
         super.onCreateOptionsMenu(menu, inflater);
         //create menu on top with buttons
         inflater.inflate(R.menu.fragment_menu, menu);
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        //starting a task when clic on button
+        //starting a task when click on button
         switch (item.getItemId()){
             //pull xml file
             case R.id.xml_pull:
@@ -97,8 +95,6 @@ public class MoviesFragment extends Fragment{
         task.execute(uri);
     }
 
-
-
     //view for a single item in a list
     private class MoviesHolder extends RecyclerView.ViewHolder{
 
@@ -122,40 +118,34 @@ public class MoviesFragment extends Fragment{
     }
     //adapter
     private class MovieAdapter extends RecyclerView.Adapter<MoviesHolder>{
-
         public MovieAdapter(List<Movie> movies){
             movieList = movies;
         }
-
         @Override
         public MoviesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.item_movie, parent, false);
             return new MoviesHolder(view);
         }
-
         @Override
         public void onBindViewHolder(MoviesHolder holder, int position) {
             Movie movie = movieList.get(position);
             holder.bindMovie(movie);
         }
-
         @Override
         public int getItemCount() {
             return movieList.size();
         }
     }
 
-
-
     // extends AsyncTask <params, progress, result>
     private class MyTask extends AsyncTask<String, String, List<Movie>> {
-
+        //before background task
         @Override
         protected void onPreExecute() {
             tasks.add(this);
         }
-
+        //background task
         @Override
         protected List<Movie> doInBackground(String... params) {
             Log.d("sting", String.valueOf(params[0]));
@@ -166,11 +156,9 @@ public class MoviesFragment extends Fragment{
             if (params[0] == XML_URL){
                 movieList = MovieXMLParser.parseFeed(content);
             }
-
             if (params[0] == JSON_URL){
                 movieList = MovieJSONParser.parseFeed(content);
             }
-
             //loop through movie list and make a network request for image
             //store the image in Bitmap var in each movie object
             for (Movie movie : movieList){
@@ -186,14 +174,13 @@ public class MoviesFragment extends Fragment{
             }
             return movieList;
         }
-
+        //after background task
         @Override
         protected void onPostExecute(List<Movie> movieList) {
             super.onPostExecute(movieList);
-
+            //updating display
             updateDisplay(movieList);
         }
-
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
